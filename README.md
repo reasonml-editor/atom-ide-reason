@@ -4,7 +4,7 @@ ReasonML/OCaml language support for Atom-IDE.
 
 Using [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server) under the hood, the same as [vscode-reasonml](https://github.com/reasonml-editor/vscode-reasonml/). Thanks for [@freebroccolo](https://github.com/freebroccolo)!
 
-![](https://github.com/zaaack/atom-ide-reason/blob/master/docs/capture.gif)
+![](https://cdn.rawgit.com/zaaack/atom-ide-reason/aa8791e1/docs/capture.gif)
 
 ## Requirements
 
