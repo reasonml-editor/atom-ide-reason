@@ -19,10 +19,7 @@
     "language-server-protocol"
   ],
   "activationCommands": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/zaaack/atom-ide-reason.git"
-  },
+  "repository": "https://github.com/zaaack/atom-ide-reason",
   "bugs": {
     "url": "https://github.com/zaaack/atom-ide-reason/issues"
   },
