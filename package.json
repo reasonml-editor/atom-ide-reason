@@ -2,7 +2,7 @@
   "name": "ide-reason",
   "main": "./lib/main",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "ReasonML/OCaml language support for Atom-IDE.",
   "author": {
     "name": "zaaack",
