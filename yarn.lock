@@ -8,12 +8,11 @@ async@2.4.1:
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@^0.1.2:
-  version "0.1.2"
-  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.1.2.tgz#b6ed526996962c64114093e119a08f31cb843f00"
+atom-languageclient@^0.4.0:
+  version "0.4.0"
+  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.4.0.tgz#6dce123d4eb62ffee66f7ff1c0862aae6b064e58"
   dependencies:
-    postinstall-build "^3.0.0"
-    vscode-jsonrpc "^3.2.0"
+    vscode-jsonrpc "^3.3.1"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -99,15 +98,11 @@ pegjs@0.10.0:
   version "0.10.0"
   resolved "http://registry.npm.taobao.org/pegjs/download/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
 
-postinstall-build@^3.0.0:
-  version "3.0.1"
-  resolved "http://registry.npm.taobao.org/postinstall-build/download/postinstall-build-3.0.1.tgz#08cb6ccf15e3a04a0e5c4165a58467556bc750c3"
-
-vscode-jsonrpc@3.2.0:
+vscode-jsonrpc@3.2.0, vscode-jsonrpc@^3.2.0:
   version "3.2.0"
   resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.2.0.tgz#c92b946ac385c8b41439b842b6bd07d517b64a7d"
 
-vscode-jsonrpc@^3.2.0:
+vscode-jsonrpc@^3.3.1:
   version "3.3.1"
   resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.3.1.tgz#b7857be58b97af664a8cdd071c91891d6c7d6a67"
 

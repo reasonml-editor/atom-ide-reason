@@ -28,7 +28,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "atom-languageclient": "^0.1.2",
+    "atom-languageclient": "^0.4.0",
     "ocaml-language-server": "https://github.com/zaaack/ocaml-language-server.git#3a477e64253b5d05224b776f18c0bb512496d53c"
   },
   "consumedServices": {
