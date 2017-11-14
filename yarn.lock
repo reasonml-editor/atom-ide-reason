@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-async@2.4.1:
-  version "2.4.1"
-  resolved "http://registry.npm.taobao.org/async/download/async-2.4.1.tgz#62a56b279c98a11d0987096a01cc3eeb8eb7bbd7"
+async@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
   dependencies:
     lodash "^4.14.0"
 
@@ -59,9 +59,9 @@ lodash@4.17.4, lodash@^4.14.0:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lokijs@1.4.3:
-  version "1.4.3"
-  resolved "http://registry.npm.taobao.org/lokijs/download/lokijs-1.4.3.tgz#f2a47ba8d6991c92d6da6a5b35be79b674453abb"
+lokijs@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/lokijs/-/lokijs-1.5.1.tgz#7e1b20217142ec2a68ecc5476cbb6c80fc3ffa56"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -69,19 +69,19 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-"ocaml-language-server@https://github.com/zaaack/ocaml-language-server.git#3a477e64253b5d05224b776f18c0bb512496d53c":
-  version "0.3.0"
-  resolved "https://github.com/zaaack/ocaml-language-server.git#3a477e64253b5d05224b776f18c0bb512496d53c"
+ocaml-language-server@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.13.tgz#2d497c15c3d987496fb9ed21ee211134bd6e166c"
   dependencies:
-    async "2.4.1"
+    async "2.6.0"
     glob "7.1.2"
     lodash "4.17.4"
-    lokijs "1.4.3"
+    lokijs "1.5.1"
     pegjs "0.10.0"
-    vscode-jsonrpc "3.2.0"
-    vscode-languageclient "3.2.2"
-    vscode-languageserver "3.2.2"
-    vscode-languageserver-types "3.2.0"
+    vscode-jsonrpc "3.5.0"
+    vscode-languageclient "3.5.0"
+    vscode-languageserver "3.5.0"
+    vscode-languageserver-types "3.5.0"
     vscode-uri "1.0.1"
 
 once@^1.3.0:
@@ -98,33 +98,39 @@ pegjs@0.10.0:
   version "0.10.0"
   resolved "http://registry.npm.taobao.org/pegjs/download/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
 
-vscode-jsonrpc@3.2.0, vscode-jsonrpc@^3.2.0:
-  version "3.2.0"
-  resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.2.0.tgz#c92b946ac385c8b41439b842b6bd07d517b64a7d"
+vscode-jsonrpc@3.5.0, vscode-jsonrpc@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.5.0.tgz#87239d9e166b2d7352245b8a813597804c1d63aa"
 
 vscode-jsonrpc@^3.3.1:
   version "3.3.1"
   resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.3.1.tgz#b7857be58b97af664a8cdd071c91891d6c7d6a67"
 
-vscode-languageclient@3.2.2:
-  version "3.2.2"
-  resolved "http://registry.npm.taobao.org/vscode-languageclient/download/vscode-languageclient-3.2.2.tgz#7843839614aa099f172b4e5f8967d42b58d77f0d"
+vscode-languageclient@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageclient/-/vscode-languageclient-3.5.0.tgz#36d02cc186a8365a4467719a290fb200a9ae490a"
   dependencies:
-    vscode-jsonrpc "^3.2.0"
-    vscode-languageserver-types "^3.2.0"
+    vscode-languageserver-protocol "^3.5.0"
 
-vscode-languageserver-types@3.2.0, vscode-languageserver-types@^3.2.0:
-  version "3.2.0"
-  resolved "http://registry.npm.taobao.org/vscode-languageserver-types/download/vscode-languageserver-types-3.2.0.tgz#8874ed92dbfa66df5fb0e2bf73f614cf9483be8f"
-
-vscode-languageserver@3.2.2:
-  version "3.2.2"
-  resolved "http://registry.npm.taobao.org/vscode-languageserver/download/vscode-languageserver-3.2.2.tgz#9a7b66e1252838ea51a0061145089a2b88a9516a"
+vscode-languageserver-protocol@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.5.0.tgz#067c5cbe27709795398d119692c97ebba1452209"
   dependencies:
-    vscode-jsonrpc "^3.2.0"
-    vscode-languageserver-types "^3.2.0"
+    vscode-jsonrpc "^3.5.0"
+    vscode-languageserver-types "^3.5.0"
 
-vscode-uri@1.0.1:
+vscode-languageserver-types@3.5.0, vscode-languageserver-types@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.5.0.tgz#e48d79962f0b8e02de955e3f524908e2b19c0374"
+
+vscode-languageserver@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver/-/vscode-languageserver-3.5.0.tgz#d28099bc6ddda8c1dd16b707e454e1b1ddae0dba"
+  dependencies:
+    vscode-languageserver-protocol "^3.5.0"
+    vscode-uri "^1.0.1"
+
+vscode-uri@1.0.1, vscode-uri@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/vscode-uri/download/vscode-uri-1.0.1.tgz#11a86befeac3c4aa3ec08623651a3c81a6d0bbc8"
 
