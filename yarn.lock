@@ -8,11 +8,25 @@ async@2.6.0:
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@^0.4.0:
-  version "0.4.0"
-  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.4.0.tgz#6dce123d4eb62ffee66f7ff1c0862aae6b064e58"
+atom-languageclient@^0.7.3:
+  version "0.7.3"
+  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.7.3.tgz#4d5c859baab3f3394dc45129935b3037719542fb"
   dependencies:
-    vscode-jsonrpc "^3.3.1"
+    vscode-jsonrpc "^3.5.0"
+
+atom-package-deps@^4.6.1:
+  version "4.6.1"
+  resolved "http://registry.npm.taobao.org/atom-package-deps/download/atom-package-deps-4.6.1.tgz#36559e70db25d077b005f0278c8e17a679686adb"
+  dependencies:
+    atom-package-path "^1.1.0"
+    sb-fs "^3.0.0"
+    semver "^5.3.0"
+
+atom-package-path@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/atom-package-path/download/atom-package-path-1.1.0.tgz#b51fedbc00e7c8ce5223d0d803db7a3f4f69614f"
+  dependencies:
+    sb-callsite "^1.1.2"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -54,6 +68,10 @@ inflight@^1.0.4:
 inherits@2:
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/inherits/download/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
+
+is-utf8@^0.2.1:
+  version "0.2.1"
+  resolved "http://registry.npm.taobao.org/is-utf8/download/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
 
 lodash@4.17.4, lodash@^4.14.0:
   version "4.17.4"
@@ -98,13 +116,34 @@ pegjs@0.10.0:
   version "0.10.0"
   resolved "http://registry.npm.taobao.org/pegjs/download/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
 
+sb-callsite@^1.1.2:
+  version "1.1.2"
+  resolved "http://registry.npm.taobao.org/sb-callsite/download/sb-callsite-1.1.2.tgz#28191fb66d64e3a3ee92084a95a90fcb5102243b"
+
+sb-fs@^3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/sb-fs/download/sb-fs-3.0.0.tgz#fbdcdd3010e80a1b8e27490cef336064974203b8"
+  dependencies:
+    sb-promisify "^2.0.1"
+    strip-bom-buf "^1.0.0"
+
+sb-promisify@^2.0.1:
+  version "2.0.2"
+  resolved "http://registry.npm.taobao.org/sb-promisify/download/sb-promisify-2.0.2.tgz#4277a54754488aa9675d886e354db894c9bdc981"
+
+semver@^5.3.0:
+  version "5.4.1"
+  resolved "http://registry.npm.taobao.org/semver/download/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
+
+strip-bom-buf@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/strip-bom-buf/download/strip-bom-buf-1.0.0.tgz#1cb45aaf57530f4caf86c7f75179d2c9a51dd572"
+  dependencies:
+    is-utf8 "^0.2.1"
+
 vscode-jsonrpc@3.5.0, vscode-jsonrpc@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.5.0.tgz#87239d9e166b2d7352245b8a813597804c1d63aa"
-
-vscode-jsonrpc@^3.3.1:
-  version "3.3.1"
-  resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.3.1.tgz#b7857be58b97af664a8cdd071c91891d6c7d6a67"
 
 vscode-languageclient@3.5.0:
   version "3.5.0"

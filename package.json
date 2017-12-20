@@ -28,9 +28,15 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "atom-languageclient": "^0.4.0",
+    "atom-languageclient": "^0.7.3",
+    "atom-package-deps": "^4.6.1",
     "ocaml-language-server": "1.0.13"
   },
+  "package-deps": [
+    "atom-ide-ui:0.7.0",
+    "language-reason:0.0.4",
+    "language-ocaml:1.9.5"
+  ],
   "consumedServices": {
     "linter-indie": {
       "versions": {
