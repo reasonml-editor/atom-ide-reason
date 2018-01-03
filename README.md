@@ -19,13 +19,13 @@ Thanks for [@freebroccolo](https://github.com/freebroccolo) and all of [ocaml-la
 
 ## Custom toolchain path per project
 
-Add one line in your `package.json`
+Add one line in your `package.json`, multi path can be separated by comma (",").
 
 ```json
 {
   "name": "My Awesome Project",
   "version": "0.1.0",
-  ...
+  //...
   "reasonToolchainPath": "/path/to/your/toolchain",
 }
 ```
