@@ -73,13 +73,17 @@ is-utf8@^0.2.1:
   version "0.2.1"
   resolved "http://registry.npm.taobao.org/is-utf8/download/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
 
-lodash@4.17.4, lodash@^4.14.0:
+lodash@4.17.5:
+  version "4.17.5"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
+
+lodash@^4.14.0:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lokijs@1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/lokijs/-/lokijs-1.5.1.tgz#7e1b20217142ec2a68ecc5476cbb6c80fc3ffa56"
+lokijs@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/lokijs/-/lokijs-1.5.2.tgz#75d43df21232f1d5479d191a69b6ebf61754a873"
 
 minimatch@^3.0.4:
   version "3.0.4"
@@ -87,19 +91,19 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-ocaml-language-server@1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.13.tgz#2d497c15c3d987496fb9ed21ee211134bd6e166c"
+ocaml-language-server@1.0.25:
+  version "1.0.25"
+  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.25.tgz#1b94aacab3a5418ed8edb4a4ce8de236af76b84b"
   dependencies:
     async "2.6.0"
     glob "7.1.2"
-    lodash "4.17.4"
-    lokijs "1.5.1"
+    lodash "4.17.5"
+    lokijs "1.5.2"
     pegjs "0.10.0"
     vscode-jsonrpc "3.5.0"
     vscode-languageclient "3.5.0"
     vscode-languageserver "3.5.0"
-    vscode-languageserver-types "3.5.0"
+    vscode-languageserver-protocol "3.5.0"
     vscode-uri "1.0.1"
 
 once@^1.3.0:
@@ -151,14 +155,14 @@ vscode-languageclient@3.5.0:
   dependencies:
     vscode-languageserver-protocol "^3.5.0"
 
-vscode-languageserver-protocol@^3.5.0:
+vscode-languageserver-protocol@3.5.0, vscode-languageserver-protocol@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.5.0.tgz#067c5cbe27709795398d119692c97ebba1452209"
   dependencies:
     vscode-jsonrpc "^3.5.0"
     vscode-languageserver-types "^3.5.0"
 
-vscode-languageserver-types@3.5.0, vscode-languageserver-types@^3.5.0:
+vscode-languageserver-types@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.5.0.tgz#e48d79962f0b8e02de955e3f524908e2b19c0374"
 
