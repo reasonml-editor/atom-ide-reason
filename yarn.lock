@@ -8,10 +8,11 @@ async@2.6.0:
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@^0.7.3:
-  version "0.7.3"
-  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.7.3.tgz#4d5c859baab3f3394dc45129935b3037719542fb"
+atom-languageclient@0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/atom-languageclient/-/atom-languageclient-0.8.3.tgz#8ce3c758051783a53a1d388896e7d99d4fc8e10c"
   dependencies:
+    fuzzaldrin-plus "^0.6.0"
     vscode-jsonrpc "^3.5.0"
 
 atom-package-deps@^4.6.1:
@@ -43,9 +44,17 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/concat-map/download/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
+deepmerge@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.0.1.tgz#25c1c24f110fb914f80001b925264dd77f3f4312"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/fs.realpath/download/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+
+fuzzaldrin-plus@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/fuzzaldrin-plus/-/fuzzaldrin-plus-0.6.0.tgz#832f6489fbe876769459599c914a670ec22947ee"
 
 glob@7.1.2:
   version "7.1.2"
@@ -91,11 +100,12 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-ocaml-language-server@1.0.25:
-  version "1.0.25"
-  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.25.tgz#1b94aacab3a5418ed8edb4a4ce8de236af76b84b"
+ocaml-language-server@1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.27.tgz#b592579a9d2edce5e7064938f08b654ed2b64dfd"
   dependencies:
     async "2.6.0"
+    deepmerge "2.0.1"
     glob "7.1.2"
     lodash "4.17.5"
     lokijs "1.5.2"
