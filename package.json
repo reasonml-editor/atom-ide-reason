@@ -28,9 +28,9 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "atom-languageclient": "^0.7.3",
+    "atom-languageclient": "0.8.3",
     "atom-package-deps": "^4.6.1",
-    "ocaml-language-server": "1.0.25"
+    "ocaml-language-server": "1.0.27"
   },
   "package-deps": [
     "atom-ide-ui:0.7.0",
