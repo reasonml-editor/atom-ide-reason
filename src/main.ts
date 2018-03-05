@@ -8,13 +8,9 @@ import * as fs from 'fs-extra'
 import merge from 'deepmerge'
 import * as languageServer from 'ocaml-language-server'
 
-// let debug = (...args: any[]) => {
-//   console.log(...args)
-// }
-
 
 type DeepPartial<T> = {
-  [K in keyof T]?: DeepPartial<T>
+  [K in keyof T]?: DeepPartial<T[K]>
 }
 
 // hack for fix merge's types
