@@ -8,13 +8,9 @@ import * as fs from 'fs-extra'
 import merge from 'deepmerge'
 import * as languageServer from 'ocaml-language-server'
 
-
-type DeepPartial<T> = {
-  [K in keyof T]?: DeepPartial<T[K]>
-}
-
-// hack for fix merge's types
 import config from './config'
+
+type DeepPartial<T> = merge.DeepPartial<T>
 
 const confFile = ".atom/ide-reason.json"
 const defaultConfig = languageServer.ISettings.defaults.reason
@@ -93,7 +89,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     this.subscriptions = new CompositeDisposable();
 
     this.subscriptions.add(atom.commands.add('atom-workspace', {
-      [`${pkg.name}:generateConfig`]: () => this.generateConfig().catch(console.error)
+      [`${pkg.name}:generate-config`]: () => this.generateConfig().catch(console.error)
     }));
   }
 
