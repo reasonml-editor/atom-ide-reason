@@ -2,15 +2,44 @@
 # yarn lockfile v1
 
 
+"@types/atom@^1.24.1":
+  version "1.24.1"
+  resolved "https://registry.npmjs.org/@types/atom/-/atom-1.24.1.tgz#cad4efb45ab4c3921a749503d7fbdc3159e5c219"
+  dependencies:
+    "@types/jquery" "*"
+    "@types/node" "*"
+
+"@types/debug@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.npmjs.org/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
+
+"@types/deepmerge@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.npmjs.org/@types/deepmerge/-/deepmerge-1.3.3.tgz#2e937b138854e10a715cb083c713522703a2d2e4"
+
+"@types/fs-extra@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/@types/fs-extra/-/fs-extra-5.0.1.tgz#cd856fbbdd6af2c11f26f8928fd8644c9e9616c9"
+  dependencies:
+    "@types/node" "*"
+
+"@types/jquery@*":
+  version "3.3.0"
+  resolved "http://registry.npm.taobao.org/@types/jquery/download/@types/jquery-3.3.0.tgz#6316ac20a1a13c5d521a2dc661befc7184f73f5b"
+
+"@types/node@*", "@types/node@^9.4.6":
+  version "9.4.6"
+  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
+
 async@2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@0.8.3:
+atom-languageclient@^0.8.3:
   version "0.8.3"
-  resolved "https://registry.yarnpkg.com/atom-languageclient/-/atom-languageclient-0.8.3.tgz#8ce3c758051783a53a1d388896e7d99d4fc8e10c"
+  resolved "https://registry.npmjs.org/atom-languageclient/-/atom-languageclient-0.8.3.tgz#8ce3c758051783a53a1d388896e7d99d4fc8e10c"
   dependencies:
     fuzzaldrin-plus "^0.6.0"
     vscode-jsonrpc "^3.5.0"
@@ -44,9 +73,23 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/concat-map/download/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
 
-deepmerge@2.0.1:
+debug@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
+  dependencies:
+    ms "2.0.0"
+
+deepmerge@2.0.1, deepmerge@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.0.1.tgz#25c1c24f110fb914f80001b925264dd77f3f4312"
+  resolved "https://registry.npmjs.org/deepmerge/-/deepmerge-2.0.1.tgz#25c1c24f110fb914f80001b925264dd77f3f4312"
+
+fs-extra@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -67,6 +110,10 @@ glob@7.1.2:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+graceful-fs@^4.1.2, graceful-fs@^4.1.6:
+  version "4.1.11"
+  resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "http://registry.npm.taobao.org/inflight/download/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -81,6 +128,12 @@ inherits@2:
 is-utf8@^0.2.1:
   version "0.2.1"
   resolved "http://registry.npm.taobao.org/is-utf8/download/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
+
+jsonfile@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
+  optionalDependencies:
+    graceful-fs "^4.1.6"
 
 lodash@4.17.5:
   version "4.17.5"
@@ -99,6 +152,10 @@ minimatch@^3.0.4:
   resolved "http://registry.npm.taobao.org/minimatch/download/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   dependencies:
     brace-expansion "^1.1.7"
+
+ms@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
 ocaml-language-server@1.0.27:
   version "1.0.27"
@@ -154,6 +211,14 @@ strip-bom-buf@^1.0.0:
   resolved "http://registry.npm.taobao.org/strip-bom-buf/download/strip-bom-buf-1.0.0.tgz#1cb45aaf57530f4caf86c7f75179d2c9a51dd572"
   dependencies:
     is-utf8 "^0.2.1"
+
+typescript@^2.7.2:
+  version "2.7.2"
+  resolved "http://registry.npm.taobao.org/typescript/download/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
+
+universalify@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/universalify/-/universalify-0.1.1.tgz#fa71badd4437af4c148841e3b3b165f9e9e590b7"
 
 vscode-jsonrpc@3.5.0, vscode-jsonrpc@^3.5.0:
   version "3.5.0"

@@ -1,0 +1,2 @@
+
+declare module "atom-languageclient"
