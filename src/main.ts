@@ -6,7 +6,6 @@ import { CompositeDisposable, FilesystemChangeEvent } from 'atom';
 import * as languageServer from 'ocaml-language-server'
 import * as fs from 'fs-extra'
 import merge from 'deepmerge'
-import throttle from 'lodash.throttle'
 import * as pkg from '../package.json'
 import config from './config'
 import * as Utils from './utils'
@@ -74,23 +73,19 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
       }),
     )
 
-    const handleConfFileChange = throttle((events: FilesystemChangeEvent) => {
-      for (const projectPath in this.servers) {
-        const event = events.find(e => e.path.startsWith(projectPath))
-        if (event) {
-          const server = this.servers[projectPath]
-          const globalConf = atom.config.get(this.getRootConfigurationKey())
-          const fileConf = Utils.readFileConf(event.path)
-          server.connection.didChangeConfiguration(merge(globalConf, fileConf))
-        }
-      }
-    }, 3000)
-
     this.subscriptions.add(
       atom.project.onDidChangeFiles(events => {
         events = events.filter(e => e.path.endsWith(confFile))
         if (events.length > 0) {
-          handleConfFileChange(events)
+          for (const projectPath in this.servers) {
+            const event = events.find(e => e.path.startsWith(projectPath))
+            if (event) {
+              const server = this.servers[projectPath]
+              const globalConf = atom.config.get(this.getRootConfigurationKey())
+              const fileConf = Utils.readFileConf(event.path)
+              server.connection.didChangeConfiguration(merge(globalConf, fileConf))
+            }
+          }
         }
       })
     )
