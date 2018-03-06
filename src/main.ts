@@ -1,20 +1,19 @@
 import * as cp from 'child_process'
 import * as os from 'os'
-import { AutoLanguageClient } from 'atom-languageclient'
+import { AutoLanguageClient, ActiveServer } from 'atom-languageclient'
 import * as path from 'path'
-import { CompositeDisposable } from 'atom';
-import * as pkg from '../package.json'
+import { CompositeDisposable, FilesystemChangeEvent } from 'atom';
+import * as languageServer from 'ocaml-language-server'
 import * as fs from 'fs-extra'
 import merge from 'deepmerge'
-import * as languageServer from 'ocaml-language-server'
-
+import throttle from 'lodash.throttle'
+import * as pkg from '../package.json'
 import config from './config'
-
-type DeepPartial<T> = merge.DeepPartial<T>
+import * as Utils from './utils'
+import { DeepPartial, Config } from './types'
 
 const confFile = ".atom/ide-reason.json"
 const defaultConfig = languageServer.ISettings.defaults.reason
-type Config = languageServer.ISettings['reason']
 
 const scopes = [
   'source.reason',
@@ -25,32 +24,10 @@ const scopes = [
   'source.mli',
 ]
 
-function flatten1<T>(array: T[]) {
-  return ([] as T[]).concat(...array)
-}
-
-function joinEnvPath(...paths: (string | undefined)[]) {
-  return flatten1(paths)
-    .filter(Boolean)
-    .join(path.delimiter)
-}
-
-function readFileConf(dir: string, file: string, property?: string) {
-  try {
-    file = path.join(dir, file)
-    if (fs.existsSync(file)) {
-      const conf = JSON.parse(fs.readFileSync(file, 'utf8'))
-      return property ? conf[property] : conf
-    }
-  } catch (e) {
-    console.error(e)
-  }
-  return null
-}
-
 class ReasonMLLanguageClient extends AutoLanguageClient {
   subscriptions: CompositeDisposable | null = null
   confPerProject: DeepPartial<Config> = {}
+  servers: { [K: string]: ActiveServer } = {}
 
   getGrammarScopes () { return scopes }
   getLanguageName () { return 'Reason' }
@@ -95,7 +72,28 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
       atom.commands.add('atom-workspace', {
         [`${pkg.name}:restart-all-servers`]: () => this.restartAllServers().catch(console.error)
       }),
-    );
+    )
+
+    const handleConfFileChange = throttle((events: FilesystemChangeEvent) => {
+      for (const projectPath in this.servers) {
+        const event = events.find(e => e.path.startsWith(projectPath))
+        if (event) {
+          const server = this.servers[projectPath]
+          const globalConf = atom.config.get(this.getRootConfigurationKey())
+          const fileConf = Utils.readFileConf(event.path)
+          server.connection.didChangeConfiguration(merge(globalConf, fileConf))
+        }
+      }
+    }, 3000)
+
+    this.subscriptions.add(
+      atom.project.onDidChangeFiles(events => {
+        events = events.filter(e => e.path.endsWith(confFile))
+        if (events.length > 0) {
+          handleConfFileChange(events)
+        }
+      })
+    )
   }
 
   async generateConfig() {
@@ -121,13 +119,19 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     )
   }
 
+  postInitialization(server: ActiveServer) {
+    this.servers[server.projectPath] = server
+    server.process.on('exit', () => {
+      delete this.servers[server.projectPath]
+    })
+  }
+
   startServerProcess(projectPath: string) {
     const serverPath = require.resolve('ocaml-language-server/bin/server')
 
 
-    const confFromPkg: DeepPartial<Config> = readFileConf(projectPath, 'package.json', 'atom-reason') || {}
-    const confFromFile: DeepPartial<Config> = readFileConf(projectPath, confFile) || {}
-    this.confPerProject = merge(merge({}, confFromPkg), confFromFile)
+    const confFromFile: DeepPartial<Config> = Utils.readFileConf(path.join(projectPath, confFile)) || {}
+    this.confPerProject = confFromFile
     const envPath = process.env.PATH +
       (os.platform() === 'darwin'
         ? (path.delimiter + '/usr/local/bin') // Temporarily fix: https://github.com/atom/atom/issues/14924
