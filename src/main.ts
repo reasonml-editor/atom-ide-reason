@@ -88,9 +88,14 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
 
     this.subscriptions = new CompositeDisposable();
 
-    this.subscriptions.add(atom.commands.add('atom-workspace', {
-      [`${pkg.name}:generate-config`]: () => this.generateConfig().catch(console.error)
-    }));
+    this.subscriptions.add(
+      atom.commands.add('atom-workspace', {
+        [`${pkg.name}:generate-config`]: () => this.generateConfig().catch(console.error)
+      }),
+      atom.commands.add('atom-workspace', {
+        [`${pkg.name}:restart-all-servers`]: () => this.restartAllServers().catch(console.error)
+      }),
+    );
   }
 
   async generateConfig() {

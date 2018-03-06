@@ -9,14 +9,6 @@
     "@types/jquery" "*"
     "@types/node" "*"
 
-"@types/debug@^0.0.30":
-  version "0.0.30"
-  resolved "https://registry.npmjs.org/@types/debug/-/debug-0.0.30.tgz#dc1e40f7af3b9c815013a7860e6252f6352a84df"
-
-"@types/deepmerge@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.npmjs.org/@types/deepmerge/-/deepmerge-1.3.3.tgz#2e937b138854e10a715cb083c713522703a2d2e4"
-
 "@types/fs-extra@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npmjs.org/@types/fs-extra/-/fs-extra-5.0.1.tgz#cd856fbbdd6af2c11f26f8928fd8644c9e9616c9"
@@ -31,18 +23,26 @@
   version "9.4.6"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
 
+"@types/node@^8.0.41":
+  version "8.9.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.4.tgz#dfd327582a06c114eb6e0441fa3d6fab35edad48"
+
 async@2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.npmjs.org/atom-languageclient/-/atom-languageclient-0.8.3.tgz#8ce3c758051783a53a1d388896e7d99d4fc8e10c"
+atom-languageclient@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/atom-languageclient/-/atom-languageclient-0.9.2.tgz#e9ab8e9903641cb705f80248f9e6d7eda2d8670e"
   dependencies:
+    "@types/atom" "^1.24.1"
+    "@types/node" "^8.0.41"
     fuzzaldrin-plus "^0.6.0"
     vscode-jsonrpc "^3.5.0"
+    vscode-languageserver-protocol "3.6.0-next.5"
+    vscode-languageserver-types "^3.6.0-next.1"
 
 atom-package-deps@^4.6.1:
   version "4.6.1"
@@ -72,12 +72,6 @@ brace-expansion@^1.1.7:
 concat-map@0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/concat-map/download/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
-
-debug@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
-  dependencies:
-    ms "2.0.0"
 
 deepmerge@2.0.1, deepmerge@^2.0.1:
   version "2.0.1"
@@ -153,10 +147,6 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-ms@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
-
 ocaml-language-server@1.0.27:
   version "1.0.27"
   resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.27.tgz#b592579a9d2edce5e7064938f08b654ed2b64dfd"
@@ -224,6 +214,10 @@ vscode-jsonrpc@3.5.0, vscode-jsonrpc@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.5.0.tgz#87239d9e166b2d7352245b8a813597804c1d63aa"
 
+vscode-jsonrpc@^3.6.0-next.1:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.6.0.tgz#848d56995d5168950d84feb5d9c237ae5c6a02d4"
+
 vscode-languageclient@3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vscode-languageclient/-/vscode-languageclient-3.5.0.tgz#36d02cc186a8365a4467719a290fb200a9ae490a"
@@ -237,9 +231,20 @@ vscode-languageserver-protocol@3.5.0, vscode-languageserver-protocol@^3.5.0:
     vscode-jsonrpc "^3.5.0"
     vscode-languageserver-types "^3.5.0"
 
+vscode-languageserver-protocol@3.6.0-next.5:
+  version "3.6.0-next.5"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.6.0-next.5.tgz#ed2ec2db759826f753c0a13977dfb2bedc4d31b3"
+  dependencies:
+    vscode-jsonrpc "^3.6.0-next.1"
+    vscode-languageserver-types "^3.6.0-next.1"
+
 vscode-languageserver-types@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.5.0.tgz#e48d79962f0b8e02de955e3f524908e2b19c0374"
+
+vscode-languageserver-types@^3.6.0-next.1:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.6.0.tgz#0bba63b0fa82a714394a4478f55a596ee4ed7d0a"
 
 vscode-languageserver@3.5.0:
   version "3.5.0"

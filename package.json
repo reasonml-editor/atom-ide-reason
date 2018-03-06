@@ -32,7 +32,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "atom-languageclient": "^0.8.3",
+    "atom-languageclient": "^0.9.2",
     "atom-package-deps": "^4.6.1",
     "deepmerge": "^2.0.1",
     "fs-extra": "^5.0.0",
@@ -41,7 +41,10 @@
   "activationCommands": {
     "atom-workspace": "ide-reason:generate-config"
   },
-  "activationHooks": ["language-reason:grammar-used", "language-ocaml:grammar-used"],
+  "activationHooks": [
+    "language-reason:grammar-used",
+    "language-ocaml:grammar-used"
+  ],
   "package-deps": [
     "atom-ide-ui:0.7.0",
     "language-reason:0.0.4",
