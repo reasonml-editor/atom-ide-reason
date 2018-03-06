@@ -41,7 +41,7 @@
   "activationCommands": {
     "atom-workspace": "ide-reason:generate-config"
   },
-  "activationHooks": ["language-reasonml:grammar-used", "language-ocaml:grammar-used"],
+  "activationHooks": ["language-reason:grammar-used", "language-ocaml:grammar-used"],
   "package-deps": [
     "atom-ide-ui:0.7.0",
     "language-reason:0.0.4",
