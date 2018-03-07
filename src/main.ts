@@ -74,21 +74,29 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     )
 
     this.subscriptions.add(
-      atom.project.onDidChangeFiles(events => {
-        events = events.filter(e => e.path.endsWith(confFile))
-        if (events.length > 0) {
-          for (const projectPath in this.servers) {
-            const event = events.find(e => e.path.startsWith(projectPath))
-            if (event) {
-              const server = this.servers[projectPath]
-              const globalConf = atom.config.get(this.getRootConfigurationKey())
-              const fileConf = Utils.readFileConf(event.path)
-              server.connection.didChangeConfiguration(merge(globalConf, fileConf))
-            }
-          }
-        }
-      })
+      atom.notifications.onDidAddNotification(notification => this.autoDismissBrokenPipeError(notification)),
+      atom.project.onDidChangeFiles(events => this.notifyServersOnProjectConfigChange(events)),
     )
+  }
+
+  autoDismissBrokenPipeError(notification: any) {
+    if (!notification.message.includes('Broken pipe')) return
+    setTimeout(() => notification.dismiss(), 1000)
+  }
+
+  notifyServersOnProjectConfigChange(events: Array<any>) {
+    events = events.filter(e => e.path.endsWith(confFile))
+    if (events.length > 0) {
+      for (const projectPath in this.servers) {
+        const event = events.find(e => e.path.startsWith(projectPath))
+        if (event) {
+          const server = this.servers[projectPath]
+          const globalConf = atom.config.get(this.getRootConfigurationKey())
+          const fileConf = Utils.readFileConf(event.path)
+          server.connection.didChangeConfiguration(merge(globalConf, fileConf))
+        }
+      }
+    }
   }
 
   async generateConfig() {
