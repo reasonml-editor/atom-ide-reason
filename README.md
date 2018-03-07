@@ -6,7 +6,7 @@ Using [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-ser
 
 Thanks for [@freebroccolo](https://github.com/freebroccolo) and all of [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server)'s contributors!
 
-![](https://cdn.rawgit.com/zaaack/atom-ide-reason/aa8791e1/docs/capture.gif)
+![](https://github.com/reasonml-editor/atom-ide-reason/blob/master/docs/capture.gif?raw=true)
 
 ## Requirements
 
