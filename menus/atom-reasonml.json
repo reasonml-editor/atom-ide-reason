@@ -1,4 +1,28 @@
 {
   "context-menu": {
+    "atom-text-editor[data-grammar=\"source reason\"]": [
+      {
+        "label": "Generate Reason interface",
+        "command": "ide-reason:generate-interface"
+      }
+    ],
+    "atom-text-editor[data-grammar=\"source ocaml\"]": [
+      {
+        "label": "Generate OCaml interface",
+        "command": "ide-reason:generate-interface"
+      }
+    ],
+    ".tree-view .file .name[data-name$=\\.re]": [
+      {
+        "label": "Generate Reason interface",
+        "command": "ide-reason:generate-interface"
+      }
+    ],
+    ".tree-view .file .name[data-name$=\\.ml]": [
+      {
+        "label": "Generate OCaml interface",
+        "command": "ide-reason:generate-interface"
+      }
+    ]
   }
 }
