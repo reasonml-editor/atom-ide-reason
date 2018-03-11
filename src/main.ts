@@ -12,11 +12,13 @@ import * as Utils from './utils'
 import { DeepPartial, Config, FileExtension } from './types'
 
 const confFile = ".atom/ide-reason.json"
-const defaultConfig = merge(
-  {},
+const defaultConfig = merge<Config>(
   languageServer.ISettings.defaults.reason,
-  // @ts-ignore: `bsc` doesn't exist in languageServer.ISettings
-  { path: { bsc: 'bsc' } },
+  {
+    path: {
+      bsc: 'bsc',
+    },
+  },
 )
 
 const scopes = [

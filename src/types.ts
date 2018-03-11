@@ -3,13 +3,8 @@ export { DeepPartial } from 'deepmerge'
 
 export type OLSConfig = ISettings['reason']
 
-export type Config = {
-  codelens: OLSConfig['codelens'];
-  debounce: OLSConfig['debounce'];
-  diagnostics: OLSConfig['diagnostics'];
-  path: OLSConfig['path'] & { bsc: string; };
-  format: OLSConfig['format'];
-  server: OLSConfig['server'];
+export interface Config extends OLSConfig {
+  path: OLSConfig['path'] & { bsc: string }
 }
 
 export type ToolKeys = keyof Config['path'];
