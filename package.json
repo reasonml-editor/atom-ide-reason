@@ -6,8 +6,7 @@
   "description": "ReasonML/OCaml language support for Atom-IDE.",
   "scripts": {
     "start": "tsc -w",
-    "build": "tsc",
-    "preversion": "npm run build"
+    "build": "tsc"
   },
   "author": {
     "name": "zaaack",
