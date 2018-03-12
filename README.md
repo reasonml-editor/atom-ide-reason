@@ -49,6 +49,8 @@ No default keybinding is set, but it can be configured in your keymap.
 ```
 
 ## TODO
+
 ### Interface generator
-* [ ] Support namespaces.
+
+* [x] Support namespaces.
 * [ ] Provide setting to ask before overwriting existing interface file.
