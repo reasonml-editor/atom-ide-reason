@@ -6,7 +6,7 @@ import { Config, DeepPartial, ToolKeys } from './types'
 
 
 const toolkeys: ToolKeys[] = [
-  "bsb", "env", "esy", "ocamlfind", "ocamlmerlin", "opam", "rebuild", "refmt", "refmterr", "rtop"
+  "bsb", "bsc", "env", "esy", "ocamlfind", "ocamlmerlin", "opam", "rebuild", "refmt", "refmterr", "rtop"
 ]
 
 function flatten1<T>(array: T[]) {
