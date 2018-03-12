@@ -142,7 +142,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     if (editor) {
       const editorPath = editor.getPath()
       if (editorPath) {
-        curProject = paths.filter(p => editorPath.startsWith(p))[0] || curProject
+        curProject = atom.project.relativizePath(editorPath)[0] || curProject
       }
     }
     const confPath = path.join(curProject, confFile)
@@ -215,9 +215,19 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
       this.showWarning("Can't find root directory of the project")
       return
     }
-    const baseRelPath = srcRelPath.substring(0, srcRelPath.length - 2)
-    const cmiAbsPath = path.join(root, "lib", "bs", baseRelPath + "cmi")
-    const interfaceAbsPath = path.join(root, baseRelPath + ext + "i")
+    let namespace = ''
+    try {
+      const bsconf = Utils.readFileConf<{ namespace: boolean; name: string }>(path.join(root, 'bsconfig.json'))
+      if (bsconf.namespace) {
+        namespace = bsconf.name ? '-' + Utils.capitalize(bsconf.name) : namespace
+      }
+    } catch (error) {
+      console.warn('[ide-reason] read bsconfig.json failed:', error)
+    }
+    console.log('srcRelPath', srcRelPath)
+    const baseRelPath = srcRelPath.substring(0, srcRelPath.length - 3)
+    const cmiAbsPath = path.join(root, "lib", "bs", baseRelPath + namespace + ".cmi")
+    const interfaceAbsPath = path.join(root, baseRelPath + '.' + ext + "i")
     const bscBin = atom.config.get(this.getRootConfigurationKey()).path.bsc
     const cmd =
       ext === 'ml'

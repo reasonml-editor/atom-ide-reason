@@ -34,6 +34,7 @@
   "dependencies": {
     "atom-languageclient": "^0.9.2",
     "atom-package-deps": "^4.6.1",
+    "cjson": "^0.5.0",
     "deepmerge": "^2.0.1",
     "fs-extra": "^5.0.0",
     "ocaml-language-server": "1.0.27"
