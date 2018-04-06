@@ -47,10 +47,3 @@ No default keybinding is set, but it can be configured in your keymap.
 'atom-workspace atom-text-editor:not([mini])':
   'ctrl-alt-g': 'ide-reason:generate-interface'
 ```
-
-## TODO
-
-### Interface generator
-
-* [x] Support namespaces.
-* [ ] Provide setting to ask before overwriting existing interface file.

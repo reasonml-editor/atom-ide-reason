@@ -238,13 +238,24 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
         this.showError("Oops! Can't generate interface file", error)
         return
       }
-      fs.outputFile(interfaceAbsPath, stdout, error => {
-        if (error) {
-          this.showError("Oops! Can't write generated interface file", error)
-          return
+      const writeFile = () => {
+        fs.outputFile(interfaceAbsPath, stdout, error => {
+          if (error) {
+            this.showError("Oops! Can't write generated interface file", error)
+            return
+          }
+          atom.workspace.open(interfaceAbsPath)
+        })
+      }
+      if (fs.existsSync(interfaceAbsPath)) {
+        console.log('stdout', stdout)
+        let override = confirm(`This interface file already exists, should we override it?\n\n${interfaceAbsPath}`)
+        if (override) {
+          writeFile()
         }
-        atom.workspace.open(interfaceAbsPath)
-      })
+      } else {
+        writeFile()
+      }
     })
   }
 }
