@@ -248,7 +248,6 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
         })
       }
       if (fs.existsSync(interfaceAbsPath)) {
-        console.log('stdout', stdout)
         let override = confirm(`This interface file already exists, should we override it?\n\n${interfaceAbsPath}`)
         if (override) {
           writeFile()
