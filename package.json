@@ -31,12 +31,12 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "atom-languageclient": "^0.9.2",
-    "atom-package-deps": "^4.6.1",
-    "cjson": "^0.5.0",
-    "deepmerge": "^2.0.1",
-    "fs-extra": "^5.0.0",
-    "ocaml-language-server": "1.0.27"
+    "atom-languageclient": "0.9.5",
+    "atom-package-deps": "4.6.2",
+    "cjson": "0.5.0",
+    "deepmerge": "2.1.0",
+    "fs-extra": "5.0.0",
+    "ocaml-language-server": "1.0.34"
   },
   "activationCommands": {
     "atom-workspace": "ide-reason:generate-config"
