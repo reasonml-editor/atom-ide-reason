@@ -163,9 +163,9 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-ocaml-language-server@1.0.34:
-  version "1.0.34"
-  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.34.tgz#8512b26c30a0c8684e1613ed0a4ae063418b382a"
+ocaml-language-server@1.0.35:
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.35.tgz#e80dab2d40a73b0eb629efc724a7b98581f801d1"
   dependencies:
     async "2.6.0"
     deepmerge "2.1.0"
