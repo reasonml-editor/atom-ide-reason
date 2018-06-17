@@ -224,11 +224,28 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     } catch (error) {
       console.warn('[ide-reason] read bsconfig.json failed:', error)
     }
-    console.log('srcRelPath', srcRelPath)
+
     const baseRelPath = srcRelPath.substring(0, srcRelPath.length - 3)
     const cmiAbsPath = path.join(root, "lib", "bs", baseRelPath + namespace + ".cmi")
     const interfaceAbsPath = path.join(root, baseRelPath + '.' + ext + "i")
-    const bscBin = atom.config.get(this.getRootConfigurationKey()).path.bsc
+
+    let bscBin;
+    if (this.confPerProject && this.confPerProject.path && this.confPerProject.path.bsc) {
+      bscBin =
+        path.isAbsolute(this.confPerProject.path.bsc)
+        ? this.confPerProject.path.bsc
+        : path.join(root, this.confPerProject.path.bsc)
+    } else {
+      bscBin = atom.config.get(this.getRootConfigurationKey()).path.bsc
+    }
+
+    if (!bscBin) {
+      this.showWarning(
+        "Provide path to `bsc` binary in config: Path > bsc",
+      )
+      return
+    }
+
     const cmd =
       ext === 'ml'
       ? `${bscBin} ${cmiAbsPath}`

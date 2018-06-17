@@ -36,7 +36,7 @@
     "cjson": "0.5.0",
     "deepmerge": "2.1.0",
     "fs-extra": "5.0.0",
-    "ocaml-language-server": "1.0.34"
+    "ocaml-language-server": "1.0.35"
   },
   "activationCommands": {
     "atom-workspace": "ide-reason:generate-config"
