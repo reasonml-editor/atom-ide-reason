@@ -23,6 +23,7 @@ const defaultConfig = merge<Config>(
 
 const scopes = [
   'ocaml',
+  'reason',
   'source.reason',
   'source.ocaml',
   'source.re',
@@ -82,7 +83,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     )
 
     this.subscriptions.add(
-      atom.commands.add('atom-text-editor[data-grammar="source reason"]', {
+      atom.commands.add('atom-text-editor[data-grammar~="reason"]', {
         [`${pkg.name}:generate-interface`]: () => this.generateInterfaceFromEditor('re'),
       }),
       atom.commands.add('atom-text-editor[data-grammar~="ocaml"]', {

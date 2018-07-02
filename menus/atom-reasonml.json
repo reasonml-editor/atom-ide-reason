@@ -1,6 +1,6 @@
 {
   "context-menu": {
-    "atom-text-editor[data-grammar=\"source reason\"]": [
+    "atom-text-editor[data-grammar~=\"reason\"]": [
       {
         "label": "Generate Reason interface",
         "command": "ide-reason:generate-interface"
