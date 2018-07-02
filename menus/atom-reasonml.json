@@ -6,7 +6,7 @@
         "command": "ide-reason:generate-interface"
       }
     ],
-    "atom-text-editor[data-grammar=\"source ocaml\"]": [
+    "atom-text-editor[data-grammar~=\"ocaml\"]": [
       {
         "label": "Generate OCaml interface",
         "command": "ide-reason:generate-interface"
