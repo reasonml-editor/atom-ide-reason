@@ -11,15 +11,19 @@ import config from './config'
 import * as Utils from './utils'
 import { DeepPartial, Config, FileExtension } from './types'
 
-const confFile = ".atom/ide-reason.json"
-const defaultConfig = merge<Config>(
-  languageServer.ISettings.defaults.reason,
-  {
-    path: {
-      bsc: 'bsc',
-    },
+const RLS_VERSION = "1.0.0-beta.7"
+
+const CONFIG_FILE = ".atom/ide-reason.json"
+const DEFAULT_PER_PROJECT_CONFIG = {
+  server: { tool: 'rls' },
+  rls: {
+    refmt: 'refmt',
+    lispRefmt: 'lispRefmt',
+    format_width: 80,
   },
-)
+  ols: languageServer.ISettings.defaults.reason,
+  interfaceGenerator: { bsc: './node_modules/bs-platform/lib/bsc.exe' },
+}
 
 const scopes = [
   'ocaml',
@@ -34,34 +38,104 @@ const scopes = [
 
 class ReasonMLLanguageClient extends AutoLanguageClient {
   subscriptions: CompositeDisposable | null = null
-  confPerProject: DeepPartial<Config> = {}
   servers: { [K: string]: ActiveServer } = {}
 
-  getGrammarScopes () { return scopes }
+  config: Config = atom.config.get(this.getRootConfigurationKey()) || {}
+  configPerProject: DeepPartial<Config> | null = null
+
   getLanguageName () { return 'Reason' }
-  getServerName () { return 'ocamlmerlin' }
-  getConnectionType() { return 'ipc' as 'ipc' }
+  getGrammarScopes () { return scopes }
   getRootConfigurationKey() { return 'ide-reason' }
 
-  mapConfigurationObject(config: Config) {
-    config = merge(merge({}, config), this.confPerProject)
-
-    return {
-      reason: {
-        codelens: {
-          enabled: false,
-          unicode: true,
-        },
-        debounce: config.debounce,
-        diagnostics: {
-          tools: config.diagnostics.tools,
-          merlinPerfLogging: false,
-        },
-        format: config.format,
-        path: config.path,
-        server: config.server,
-      },
+  getServerName () {
+    switch (this.config.server.tool) {
+      case 'rls': return 'reason'
+      case 'ols': return 'ocamlmerlin'
+      default: return 'reason'
     }
+  }
+
+  getConfigPropKeypath(...keys: string[]) {
+    return this.getRootConfigurationKey() + '.' + keys.join('.')
+  }
+
+  updateConfig(projectPath: string) {
+    const configGlobal = atom.config.get(this.getRootConfigurationKey())
+    const configPerProject = Utils.readPerProjectConfig(path.join(projectPath, CONFIG_FILE))
+
+    this.config = merge(configGlobal, configPerProject || {})
+    this.configPerProject = configPerProject
+  }
+
+  mapConfigurationObject(config: Config) {
+    config = merge(merge({}, config), this.configPerProject || {})
+
+    switch (config.server.tool) {
+      case 'rls':
+        return {
+          refmt: config.rls.refmt,
+          lispRefmt: config.rls.lispRefmt,
+          format_width: config.rls.formatWidth,
+          per_value_codelens: false,
+          dependencies_codelens: false,
+          opens_codelens: false,
+        }
+      case 'ols':
+        return {
+          reason: {
+            codelens: {
+              enabled: false,
+              unicode: true,
+            },
+            debounce: config.ols.debounce,
+            diagnostics: {
+              tools: config.ols.diagnostics.tools,
+              merlinPerfLogging: false,
+            },
+            format: config.ols.format,
+            path: config.ols.path,
+            server: config.ols.server,
+          },
+        }
+      default: throw Error('Invalid language server identifier')
+    }
+  }
+
+  notifyServersOnProjectConfigChange(events: Array<any>) {
+    events = events.filter(e => e.path.endsWith(CONFIG_FILE))
+    if (events.length > 0) {
+      for (const projectPath in this.servers) {
+        const event = events.find(e => e.path.startsWith(projectPath))
+        if (event) {
+          const nextConfigPerProject = Utils.readPerProjectConfig(path.join(projectPath, CONFIG_FILE))
+          this.updateConfig(projectPath)
+          const server = this.servers[projectPath]
+          const mappedConfig = this.mapConfigurationObject(this.config)
+          server.connection.didChangeConfiguration({settings: mappedConfig})
+        }
+      }
+    }
+  }
+
+  async generateConfig() {
+    const paths = atom.project.getPaths()
+    let curProject = paths[0]
+    const editor = atom.workspace.getActiveTextEditor()
+    if (editor) {
+      const editorPath = editor.getPath()
+      if (editorPath) {
+        curProject = atom.project.relativizePath(editorPath)[0] || curProject
+      }
+    }
+    const confPath = path.join(curProject, CONFIG_FILE)
+    if (fs.existsSync(confPath)) {
+      return this.showWarning('ide-reason.json already exists!', confPath)
+    }
+    await fs.outputFile(
+      confPath,
+      JSON.stringify(DEFAULT_PER_PROJECT_CONFIG, null, 2),
+      'utf-8',
+    )
   }
 
   activate() {
@@ -103,6 +177,61 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     )
   }
 
+  startServerProcess(projectPath: string) {
+    this.updateConfig(projectPath)
+
+    switch (this.config.server.tool) {
+      case 'rls': return this.startRls(projectPath)
+      case 'ols': return this.startOls(projectPath)
+      default: throw Error('Invalid language server identifier')
+    }
+  }
+
+  startRls(projectPath: string) {
+    const serverPath = require.resolve(`../rls/rls-${process.platform}-${RLS_VERSION}.exe`)
+    return Promise.resolve(cp.spawn(serverPath, [], {
+      cwd: projectPath,
+      env: this.getEnv(),
+    }))
+  }
+
+  startOls(projectPath: string) {
+    const serverPath = require.resolve('ocaml-language-server/bin/server')
+    return this.spawnChildNode([serverPath, '--node-ipc'], {
+      stdio: [null, null, null, 'ipc'],
+      cwd: projectPath,
+      env: this.getEnv(),
+    })
+  }
+
+  getEnv() {
+    const PATH = process.env.PATH +
+      (os.platform() === 'darwin'
+        ? (path.delimiter + '/usr/local/bin') // Temporarily fix: https://github.com/atom/atom/issues/14924
+        : '')
+    return Object.assign({}, process.env, { PATH })
+  }
+
+  getConnectionType() {
+    return this.config.server.tool === 'ols' ? 'ipc': 'stdio'
+  }
+
+  postInitialization(server: ActiveServer) {
+    this.servers[server.projectPath] = server
+    server.process.on('exit', () => {
+      delete this.servers[server.projectPath]
+    })
+  }
+
+  deactivate() {
+    let result = super.deactivate()
+    if (this.subscriptions) {
+      this.subscriptions.dispose()
+    }
+    return result
+  }
+
+  // Notifications
   showWarning(message: string, detail?: string) {
     atom.notifications.addWarning(message, {
       detail,
@@ -117,77 +246,10 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     })
   }
 
+  // TODO: Remove when OLS support will be dropped
   autoDismissBrokenPipeError(notification: any) {
     if (!notification.message.includes('Broken pipe')) return
     setTimeout(() => notification.dismiss(), 1000)
-  }
-
-  notifyServersOnProjectConfigChange(events: Array<any>) {
-    events = events.filter(e => e.path.endsWith(confFile))
-    if (events.length > 0) {
-      for (const projectPath in this.servers) {
-        const event = events.find(e => e.path.startsWith(projectPath))
-        if (event) {
-          const server = this.servers[projectPath]
-          const globalConf = atom.config.get(this.getRootConfigurationKey())
-          const fileConf = Utils.readFileConf(event.path)
-          server.connection.didChangeConfiguration(merge(globalConf, fileConf))
-        }
-      }
-    }
-  }
-
-  async generateConfig() {
-    const paths = atom.project.getPaths()
-    let curProject = paths[0]
-    const editor = atom.workspace.getActiveTextEditor()
-    if (editor) {
-      const editorPath = editor.getPath()
-      if (editorPath) {
-        curProject = atom.project.relativizePath(editorPath)[0] || curProject
-      }
-    }
-    const confPath = path.join(curProject, confFile)
-    if (fs.existsSync(confPath)) {
-      return this.showWarning('ide-reason.json already exists!', confPath)
-    }
-    await fs.outputFile(
-      confPath,
-      JSON.stringify(defaultConfig, null, 2),
-      'utf-8',
-    )
-  }
-
-  postInitialization(server: ActiveServer) {
-    this.servers[server.projectPath] = server
-    server.process.on('exit', () => {
-      delete this.servers[server.projectPath]
-    })
-  }
-
-  startServerProcess(projectPath: string) {
-    const serverPath = require.resolve('ocaml-language-server/bin/server')
-    const confFromFile: DeepPartial<Config> = Utils.readFileConf(path.join(projectPath, confFile)) || {}
-    this.confPerProject = confFromFile
-    const envPath = process.env.PATH +
-      (os.platform() === 'darwin'
-        ? (path.delimiter + '/usr/local/bin') // Temporarily fix: https://github.com/atom/atom/issues/14924
-        : '')
-    return super.spawnChildNode([serverPath, '--node-ipc'], {
-        stdio: [null, null, null, 'ipc'],
-        cwd: projectPath,
-        env: Object.assign({}, process.env, {
-          PATH: envPath
-        }),
-      })
-  }
-
-  deactivate() {
-    let result = super.deactivate()
-    if (this.subscriptions) {
-      this.subscriptions.dispose()
-    }
-    return result
   }
 
   // Interface generator
@@ -219,8 +281,8 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     }
     let namespace = ''
     try {
-      const bsconf = Utils.readFileConf<{ namespace: boolean; name: string }>(path.join(root, 'bsconfig.json'))
-      if (bsconf.namespace) {
+      const bsconf = Utils.readFile<{ name: string; namespace: boolean }>(path.join(root, 'bsconfig.json'))
+      if (bsconf && bsconf.namespace) {
         namespace = bsconf.name ? '-' + Utils.capitalize(bsconf.name) : namespace
       }
     } catch (error) {
@@ -232,18 +294,18 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     const interfaceAbsPath = path.join(root, baseRelPath + '.' + ext + "i")
 
     let bscBin;
-    if (this.confPerProject && this.confPerProject.path && this.confPerProject.path.bsc) {
+    if (this.configPerProject && this.configPerProject.interfaceGenerator && this.configPerProject.interfaceGenerator.bsc) {
       bscBin =
-        path.isAbsolute(this.confPerProject.path.bsc)
-        ? this.confPerProject.path.bsc
-        : path.join(root, this.confPerProject.path.bsc)
+        path.isAbsolute(this.configPerProject.interfaceGenerator.bsc)
+        ? this.configPerProject.interfaceGenerator.bsc
+        : path.join(root, this.configPerProject.interfaceGenerator.bsc)
     } else {
-      bscBin = atom.config.get(this.getRootConfigurationKey()).path.bsc
+      bscBin = this.config.interfaceGenerator.bsc
     }
 
     if (!bscBin) {
       this.showWarning(
-        "Provide path to `bsc` binary in config: Path > bsc",
+        "Provide path to `bsc` binary in config: Interface generator > bsc",
       )
       return
     }

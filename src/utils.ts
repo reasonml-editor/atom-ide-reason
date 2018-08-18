@@ -2,48 +2,57 @@ import * as os from 'os'
 import * as path from 'path'
 import * as fs from 'fs-extra'
 import merge from 'deepmerge'
-import { Config, DeepPartial, ToolKeys } from './types'
+import { Config, DeepPartial, OLSToolKeys } from './types'
 import * as cjson from 'cjson'
 
-
-const toolkeys: ToolKeys[] = [
-  "bsb", "bsc", "env", "esy", "ocamlfind", "ocamlmerlin", "opam", "rebuild", "refmt", "refmterr", "rtop"
+const toolkeys: OLSToolKeys[] = [
+  "bsb",
+  "env",
+  "esy",
+  "ocamlfind",
+  "ocamlmerlin",
+  "opam",
+  "rebuild",
+  "refmt",
+  "refmterr",
+  "rtop",
 ]
 
 function flatten1<T>(array: T[]) {
   return ([] as T[]).concat(...array)
 }
 
-function parseConf(conf: any, property: string = "toolchainPath") {
-  if (!conf || !conf[property]) {
-    return conf
-  }
-  let confFromPath: DeepPartial<Config> = {path: {}}
-  const toolchainPaths: string[] = flatten1([conf[property]])
-  delete conf[property]
-  for (const toolname of toolkeys) {
-    for (const toolchainPath of toolchainPaths) {
-      if (fs.existsSync(path.join(toolchainPath, toolname))) {
-        if (confFromPath.path) {
-          confFromPath.path[toolname] = path.join(toolchainPath, toolname)
-        }
-        break;
-      }
-    }
-  }
-  return merge(merge({}, confFromPath), conf)
-}
-
-export function readFileConf<Config>(file: string): DeepPartial<Config> {
+export function readFile<Config>(file: string) {
   try {
     if (fs.existsSync(file)) {
-      const conf = cjson.load(file)
-      return parseConf(conf)
+      return cjson.load(file)
     }
   } catch (e) {
     console.error(e)
   }
-  return {}
+  return null
+}
+
+export function readPerProjectConfig(file: string) {
+  const configFromFile = readFile(file)
+
+  if (!configFromFile || !configFromFile.toolchainPath) {
+    return configFromFile
+  }
+
+  let configFromPath: any = {ols: {path: {}}}
+  const toolchainPaths: string[] = flatten1([configFromFile.toolchainPath])
+  delete configFromFile.toolchainPath
+  for (const toolname of toolkeys) {
+    for (const toolchainPath of toolchainPaths) {
+      if (fs.existsSync(path.join(toolchainPath, toolname))) {
+        configFromPath.ols.path[toolname] = path.join(toolchainPath, toolname)
+        break;
+      }
+    }
+  }
+
+  return merge(merge({}, configFromPath), configFromFile)
 }
 
 export function capitalize(str: string) {
