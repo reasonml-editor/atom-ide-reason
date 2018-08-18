@@ -16,13 +16,18 @@ apm install ide-reason
 ```
 
 ## Requirements
-* ocaml
-* [merlin](https://github.com/ocaml/merlin)
 * [atom-ide-ui](https://atom.io/packages/atom-ide-ui) or [nuclide](https://atom.io/packages/nuclide)
 * language syntax package
   * [language-ocaml](https://atom.io/packages/language-ocaml) for ocaml
   * [language-reason](https://atom.io/packages/language-reason) for reason
 * [BuckleScript](https://bucklescript.github.io/docs/en/installation.html) to use `bsb` as diagnostic tool & to generate interface files<br>
+
+### For reason-language-server
+You don't need other dependences any more.
+
+### For ocaml-language-server
+You need `ocamlmerlin` in your path. You can install it via either [opam](https://github.com/ocaml/merlin) or [reason-ide(Recommand)](https://github.com/reasonml/reason-cli).
+
 _If you use global installation, everything should work out of the box. Otherwise, configure path to your `bsb` & `bsc` binaries via package settings or project config._
 
 ## Custom configuration per project
