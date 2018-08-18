@@ -1,3 +1,20 @@
+## UNRELEASED
+* Add `reason-language-server` support (`ocaml-language-server` is still supported).
+
+This is a breaking change. Update you Atom configuration by scoping `ocaml-language-server` settings under `ols` key, e.g.:
+
+```diff
+- "ide-reason":
+-   diagnostics:
+-     tools: ["bsb"]
+
++ "ide-reason":
++   ols:
++     diagnostics:
++       tools: ["bsb"]
+```
+
+
 ## 0.1.13
 * Add interfaces files generator (`rei` & `mli`).
 * Auto dismiss error messages related to `Broken pipe`.
