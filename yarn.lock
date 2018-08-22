@@ -9,6 +9,12 @@
     "@types/jquery" "*"
     "@types/node" "*"
 
+"@types/atom@^1.28.0":
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/@types/atom/-/atom-1.28.0.tgz#1c80cfa41381b6609e3eac4f84c013cd5069d36d"
+  dependencies:
+    "@types/node" "*"
+
 "@types/fs-extra@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npmjs.org/@types/fs-extra/-/fs-extra-5.0.1.tgz#cd856fbbdd6af2c11f26f8928fd8644c9e9616c9"
@@ -33,14 +39,14 @@ async@2.6.0:
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@^0.9.5:
-  version "0.9.5"
-  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.9.5.tgz#71746874f768df993618da4b4c288665acaa2a16"
+atom-languageclient@0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/atom-languageclient/-/atom-languageclient-0.9.6.tgz#2bbb8fad72ae183c0a7d5ac3cbeea87358ecf260"
   dependencies:
-    "@types/atom" "^1.24.1"
+    "@types/atom" "^1.28.0"
     "@types/node" "^8.0.41"
     fuzzaldrin-plus "^0.6.0"
-    vscode-jsonrpc "^3.5.0"
+    vscode-jsonrpc "^3.6.0"
     vscode-languageserver-protocol "3.6.0-next.5"
     vscode-languageserver-types "^3.6.0-next.1"
 
@@ -163,9 +169,9 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-ocaml-language-server@^1.0.35:
+ocaml-language-server@1.0.35:
   version "1.0.35"
-  resolved "http://registry.npm.taobao.org/ocaml-language-server/download/ocaml-language-server-1.0.35.tgz#e80dab2d40a73b0eb629efc724a7b98581f801d1"
+  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.35.tgz#e80dab2d40a73b0eb629efc724a7b98581f801d1"
   dependencies:
     async "2.6.0"
     deepmerge "2.1.0"
@@ -230,7 +236,7 @@ vscode-jsonrpc@3.6.0, vscode-jsonrpc@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.6.0.tgz#848d56995d5168950d84feb5d9c237ae5c6a02d4"
 
-vscode-jsonrpc@^3.5.0, vscode-jsonrpc@^3.6.0-next.1:
+vscode-jsonrpc@^3.6.0-next.1:
   version "3.6.2"
   resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.6.2.tgz#3b5eef691159a15556ecc500e9a8a0dd143470c8"
 
