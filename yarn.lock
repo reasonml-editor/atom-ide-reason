@@ -2,26 +2,25 @@
 # yarn lockfile v1
 
 
-"@types/atom@^1.24.1":
-  version "1.24.1"
-  resolved "https://registry.npmjs.org/@types/atom/-/atom-1.24.1.tgz#cad4efb45ab4c3921a749503d7fbdc3159e5c219"
-  dependencies:
-    "@types/jquery" "*"
-    "@types/node" "*"
-
-"@types/fs-extra@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.npmjs.org/@types/fs-extra/-/fs-extra-5.0.1.tgz#cd856fbbdd6af2c11f26f8928fd8644c9e9616c9"
+"@types/atom@1.28.0", "@types/atom@^1.28.0":
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/@types/atom/-/atom-1.28.0.tgz#1c80cfa41381b6609e3eac4f84c013cd5069d36d"
   dependencies:
     "@types/node" "*"
 
-"@types/jquery@*":
-  version "3.3.0"
-  resolved "http://registry.npm.taobao.org/@types/jquery/download/@types/jquery-3.3.0.tgz#6316ac20a1a13c5d521a2dc661befc7184f73f5b"
+"@types/fs-extra@5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-5.0.4.tgz#b971134d162cc0497d221adde3dbb67502225599"
+  dependencies:
+    "@types/node" "*"
 
-"@types/node@*", "@types/node@^9.4.6":
+"@types/node@*":
   version "9.4.6"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
+
+"@types/node@10.7.1":
+  version "10.7.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
 "@types/node@^8.0.41":
   version "8.10.26"
@@ -33,14 +32,14 @@ async@2.6.0:
   dependencies:
     lodash "^4.14.0"
 
-atom-languageclient@^0.9.5:
-  version "0.9.5"
-  resolved "http://registry.npm.taobao.org/atom-languageclient/download/atom-languageclient-0.9.5.tgz#71746874f768df993618da4b4c288665acaa2a16"
+atom-languageclient@0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/atom-languageclient/-/atom-languageclient-0.9.6.tgz#2bbb8fad72ae183c0a7d5ac3cbeea87358ecf260"
   dependencies:
-    "@types/atom" "^1.24.1"
+    "@types/atom" "^1.28.0"
     "@types/node" "^8.0.41"
     fuzzaldrin-plus "^0.6.0"
-    vscode-jsonrpc "^3.5.0"
+    vscode-jsonrpc "^3.6.0"
     vscode-languageserver-protocol "3.6.0-next.5"
     vscode-languageserver-types "^3.6.0-next.1"
 
@@ -163,9 +162,9 @@ minimatch@^3.0.4:
   dependencies:
     brace-expansion "^1.1.7"
 
-ocaml-language-server@^1.0.35:
+ocaml-language-server@1.0.35:
   version "1.0.35"
-  resolved "http://registry.npm.taobao.org/ocaml-language-server/download/ocaml-language-server-1.0.35.tgz#e80dab2d40a73b0eb629efc724a7b98581f801d1"
+  resolved "https://registry.yarnpkg.com/ocaml-language-server/-/ocaml-language-server-1.0.35.tgz#e80dab2d40a73b0eb629efc724a7b98581f801d1"
   dependencies:
     async "2.6.0"
     deepmerge "2.1.0"
@@ -218,9 +217,9 @@ strip-bom-buf@^1.0.0:
   dependencies:
     is-utf8 "^0.2.1"
 
-typescript@^2.7.2:
-  version "2.7.2"
-  resolved "http://registry.npm.taobao.org/typescript/download/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
+typescript@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.0.1.tgz#43738f29585d3a87575520a4b93ab6026ef11fdb"
 
 universalify@^0.1.0:
   version "0.1.1"
@@ -230,7 +229,7 @@ vscode-jsonrpc@3.6.0, vscode-jsonrpc@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/vscode-jsonrpc/-/vscode-jsonrpc-3.6.0.tgz#848d56995d5168950d84feb5d9c237ae5c6a02d4"
 
-vscode-jsonrpc@^3.5.0, vscode-jsonrpc@^3.6.0-next.1:
+vscode-jsonrpc@^3.6.0-next.1:
   version "3.6.2"
   resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.6.2.tgz#3b5eef691159a15556ecc500e9a8a0dd143470c8"
 
