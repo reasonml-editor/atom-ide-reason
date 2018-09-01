@@ -15,9 +15,7 @@ apm install ide-reason
 * language syntax package
   * [language-ocaml](https://atom.io/packages/language-ocaml) for OCaml
   * [language-reason](https://atom.io/packages/language-reason) for Reason
-* [BuckleScript](https://reasonml.github.io/docs/en/installation) to use `bsb` as diagnostic tool & to generate interface files.
-
-_If you have a global BuckleScript installation, everything should work out of the box. Otherwise, configure path to your `bsb` & `bsc` binaries via package settings or project config._
+* [BuckleScript](https://reasonml.github.io/docs/en/installation) to use `bsb` as diagnostic tool & to generate interface files. Both, global & local installations are supported, local is recommended.
 
 ## Custom configuration per project
 You can add configuration per project by adding `.atom/ide-reason.json`, which can be generated via command `ide-reason:generate-config`. Custom configuration will be merged with global one.
