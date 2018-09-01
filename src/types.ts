@@ -13,7 +13,6 @@ export interface Config {
   server: { tool: 'rls' | 'ols' },
   rls: RLSConfig,
   ols: OLSConfig,
-  interfaceGenerator: { bsc: string },
 }
 
 export type OLSToolKeys = keyof OLSConfig['path'];

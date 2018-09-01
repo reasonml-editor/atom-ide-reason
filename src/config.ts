@@ -217,19 +217,4 @@ export default {
       },
     },
   },
-
-  interfaceGenerator: {
-    type: 'object',
-    title: 'Interface Generator',
-    order: 40,
-    properties: {
-      bsc: {
-        type: 'string',
-        title: 'bsc',
-        description: 'The path to the `bsc` binary.',
-        default: 'bsc',
-        order: 10,
-      },
-    },
-  },
 };
