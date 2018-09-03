@@ -2,7 +2,7 @@
   "name": "ide-reason",
   "main": "./lib/main",
   "private": true,
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0",
   "description": "ReasonML/OCaml language support for Atom-IDE.",
   "scripts": {
     "start": "tsc -w",
