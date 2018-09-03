@@ -22,7 +22,6 @@ const DEFAULT_PER_PROJECT_CONFIG = {
     format_width: 80,
   },
   ols: languageServer.ISettings.defaults.reason,
-  interfaceGenerator: { bsc: './node_modules/bs-platform/lib/bsc.exe' },
 }
 
 const scopes = [
@@ -246,6 +245,13 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     })
   }
 
+  showErrorMessage(message: string, detail?: string) {
+    atom.notifications.addError(message, {
+      detail,
+      dismissable: true,
+    })
+  }
+
   // TODO: Remove when OLS support will be dropped
   autoDismissBrokenPipeError(notification: any) {
     if (!notification.message.includes('Broken pipe')) return
@@ -273,12 +279,32 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     this.generateInterface(srcAbsPath, ext)
   }
 
+  findRoot(location: string): string | null {
+    const dirs = location.split(path.sep);
+
+    if (dirs.length === 0 || (dirs.length === 1 && dirs[0] === "")) {
+      return null;
+    }
+
+    const config = path.join(...dirs, 'bsconfig.json');
+
+    if (fs.existsSync(config)) {
+      return location;
+    } else {
+      let parent = path.join(...dirs.slice(0, -1));
+      return this.findRoot(parent[0] === path.sep ? parent : path.sep + parent);
+    }
+  }
+
   generateInterface(srcAbsPath: string, ext: FileExtension) {
-    const [root, srcRelPath] = atom.project.relativizePath(srcAbsPath)
+    const root = this.findRoot(path.dirname(srcAbsPath));
     if (!root) {
-      this.showWarning("Can't find root directory of the project")
+      this.showErrorMessage("Can't find root directory of the project");
       return
     }
+    const file = path.basename(srcAbsPath);
+    const srcRelPath = path.relative(root, srcAbsPath);
+
     let namespace = ''
     try {
       const bsconf = Utils.readFile<{ name: string; namespace: boolean }>(path.join(root, 'bsconfig.json'))
@@ -286,7 +312,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
         namespace = bsconf.name ? '-' + Utils.capitalize(bsconf.name) : namespace
       }
     } catch (error) {
-      console.warn('[ide-reason] read bsconfig.json failed:', error)
+      console.warn("[ide-reason] read bsconfig.json failed:", error)
     }
 
     const baseRelPath = srcRelPath.substring(0, srcRelPath.length - 3)
@@ -294,20 +320,19 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     const interfaceAbsPath = path.join(root, baseRelPath + '.' + ext + "i")
 
     let bscBin;
-    if (this.configPerProject && this.configPerProject.interfaceGenerator && this.configPerProject.interfaceGenerator.bsc) {
-      bscBin =
-        path.isAbsolute(this.configPerProject.interfaceGenerator.bsc)
-        ? this.configPerProject.interfaceGenerator.bsc
-        : path.join(root, this.configPerProject.interfaceGenerator.bsc)
+    const projectBscBin = path.join(root, "node_modules", "bs-platform", "lib", "bsc.exe");
+    if (fs.existsSync(projectBscBin)) {
+      bscBin = projectBscBin;
     } else {
-      bscBin = this.config.interfaceGenerator.bsc
-    }
-
-    if (!bscBin) {
-      this.showWarning(
-        "Provide path to `bsc` binary in config: Interface generator > bsc",
-      )
-      return
+      try {
+        cp.execSync("which bsc");
+      } catch (error) {
+        console.error(error);
+        this.showErrorMessage("Can't find bs-platform binary. Make sure you have it installed.");
+        return;
+      }
+      this.showWarning("Using global `bsc` binary.");
+      bscBin = "bsc";
     }
 
     const cmd =
