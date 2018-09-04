@@ -1,4 +1,8 @@
-## UNRELEASED
+## 1.0.1
+* Bump `reason-language-server` to `1.0.4`.
+* Fix interfaces files generator for Lerna / Yarn Workspaces users.
+
+## 1.0.0
 * Add `reason-language-server` support (`ocaml-language-server` is still supported).
 
 This is a breaking change. Update you Atom configuration by scoping `ocaml-language-server` settings under `ols` key, e.g.:
