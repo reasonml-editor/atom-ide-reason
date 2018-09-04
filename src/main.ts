@@ -279,35 +279,49 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     this.generateInterface(srcAbsPath, ext)
   }
 
-  findRoot(location: string): string | null {
+  findBinRoot(location: string): string | null {
+    return this.findRoot(location, ["node_modules", "bs-platform", "lib", "bsb.exe"]);
+  }
+
+  findProjectRoot(location: string): string | null {
+    return this.findRoot(location, ["bsconfig.json"]);
+  }
+
+  findRoot(location: string, test: string[]): string | null {
     const dirs = location.split(path.sep);
 
     if (dirs.length === 0 || (dirs.length === 1 && dirs[0] === "")) {
       return null;
     }
 
-    const config = path.join(...dirs, 'bsconfig.json');
+    const file = path.join(...dirs, ...test);
 
-    if (fs.existsSync(config)) {
+    if (fs.existsSync(file)) {
       return location;
     } else {
       let parent = path.join(...dirs.slice(0, -1));
-      return this.findRoot(parent[0] === path.sep ? parent : path.sep + parent);
+      return this.findRoot(
+        parent[0] === path.sep ? parent : path.sep + parent,
+        test,
+      );
     }
   }
 
   generateInterface(srcAbsPath: string, ext: FileExtension) {
-    const root = this.findRoot(path.dirname(srcAbsPath));
-    if (!root) {
+    const location = path.dirname(srcAbsPath);
+    const binRoot = this.findBinRoot(location);
+    const projectRoot = this.findProjectRoot(location);
+
+    if (!projectRoot) {
       this.showErrorMessage("Can't find root directory of the project");
       return
     }
     const file = path.basename(srcAbsPath);
-    const srcRelPath = path.relative(root, srcAbsPath);
+    const srcRelPath = path.relative(projectRoot, srcAbsPath);
 
     let namespace = ''
     try {
-      const bsconf = Utils.readFile<{ name: string; namespace: boolean }>(path.join(root, 'bsconfig.json'))
+      const bsconf = Utils.readFile<{ name: string; namespace: boolean }>(path.join(projectRoot, "bsconfig.json"))
       if (bsconf && bsconf.namespace) {
         namespace = bsconf.name ? '-' + Utils.capitalize(bsconf.name) : namespace
       }
@@ -316,11 +330,11 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     }
 
     const baseRelPath = srcRelPath.substring(0, srcRelPath.length - 3)
-    const cmiAbsPath = path.join(root, "lib", "bs", baseRelPath + namespace + ".cmi")
-    const interfaceAbsPath = path.join(root, baseRelPath + '.' + ext + "i")
+    const cmiAbsPath = path.join(projectRoot, "lib", "bs", baseRelPath + namespace + ".cmi")
+    const interfaceAbsPath = path.join(projectRoot, baseRelPath + '.' + ext + "i")
 
     let bscBin;
-    const projectBscBin = path.join(root, "node_modules", "bs-platform", "lib", "bsc.exe");
+    const projectBscBin = path.join(binRoot, "node_modules", "bs-platform", "lib", "bsc.exe");
     if (fs.existsSync(projectBscBin)) {
       bscBin = projectBscBin;
     } else {
