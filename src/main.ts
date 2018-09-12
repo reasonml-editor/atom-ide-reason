@@ -11,7 +11,7 @@ import config from './config'
 import * as Utils from './utils'
 import { DeepPartial, Config, FileExtension } from './types'
 
-const RLS_VERSION = "1.0.4"
+const RLS_VERSION = "1.1.0"
 
 const CONFIG_FILE = ".atom/ide-reason.json"
 const DEFAULT_PER_PROJECT_CONFIG = {

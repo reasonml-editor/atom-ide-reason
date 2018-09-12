@@ -1,3 +1,6 @@
+## 1.1.0
+* Bump `reason-language-server` to `1.1.0`.
+
 ## 1.0.1
 * Bump `reason-language-server` to `1.0.4`.
 * Fix interfaces files generator for Lerna / Yarn Workspaces users.
