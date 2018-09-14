@@ -230,6 +230,18 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     return result
   }
 
+  filterChangeWatchedFiles(file: string) {
+    switch (this.config.server.tool) {
+      case 'rls': {
+        return file.includes("/bsconfig.json") || file.includes("/.merlin")
+      }
+      case 'ols': {
+        return !file.includes("/.git")
+      }
+      default: return true
+    }
+  }
+
   // Notifications
   showWarning(message: string, detail?: string) {
     atom.notifications.addWarning(message, {
@@ -334,8 +346,11 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     const interfaceAbsPath = path.join(projectRoot, baseRelPath + '.' + ext + "i")
 
     let bscBin;
-    const projectBscBin = path.join(binRoot, "node_modules", "bs-platform", "lib", "bsc.exe");
-    if (fs.existsSync(projectBscBin)) {
+    const projectBscBin =
+      binRoot
+      ? path.join(binRoot, "node_modules", "bs-platform", "lib", "bsc.exe")
+      : null;
+    if (projectBscBin && fs.existsSync(projectBscBin)) {
       bscBin = projectBscBin;
     } else {
       try {
