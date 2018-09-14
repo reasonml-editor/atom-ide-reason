@@ -346,8 +346,11 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     const interfaceAbsPath = path.join(projectRoot, baseRelPath + '.' + ext + "i")
 
     let bscBin;
-    const projectBscBin = path.join(binRoot, "node_modules", "bs-platform", "lib", "bsc.exe");
-    if (fs.existsSync(projectBscBin)) {
+    const projectBscBin =
+      binRoot
+      ? path.join(binRoot, "node_modules", "bs-platform", "lib", "bsc.exe")
+      : null;
+    if (projectBscBin && fs.existsSync(projectBscBin)) {
       bscBin = projectBscBin;
     } else {
       try {
