@@ -1,3 +1,6 @@
+## 1.1.1
+* Bump `reason-language-server` to `1.2.4`.
+
 ## 1.1.0
 * Bump `reason-language-server` to `1.1.0`.
 * Reduce number of dispatched files on change.
