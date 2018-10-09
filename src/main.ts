@@ -11,7 +11,7 @@ import config from './config'
 import * as Utils from './utils'
 import { DeepPartial, Config, FileExtension } from './types'
 
-const RLS_VERSION = "1.1.0"
+const RLS_VERSION = "1.2.4"
 
 const CONFIG_FILE = ".atom/ide-reason.json"
 const DEFAULT_PER_PROJECT_CONFIG = {
@@ -187,7 +187,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
   }
 
   startRls(projectPath: string) {
-    const serverPath = require.resolve(`../rls/rls-${process.platform}-${RLS_VERSION}.exe`)
+    const serverPath = require.resolve(`../rls/${this.getRlsBin()}`)
     return Promise.resolve(cp.spawn(serverPath, [], {
       cwd: projectPath,
       env: this.getEnv(),
@@ -201,6 +201,15 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
       cwd: projectPath,
       env: this.getEnv(),
     })
+  }
+
+  getRlsBin() {
+    switch (process.platform) {
+      case "darwin": return "bin.native"
+      case "linux": return "bin.native.linux"
+      case "win32": return "bin.native.exe"
+      default: throw new Error("Unknown platform")
+    }
   }
 
   getEnv() {
