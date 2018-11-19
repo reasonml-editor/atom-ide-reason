@@ -1,3 +1,6 @@
+## 1.1.2
+* Bump `reason-language-server` to `1.3.0`.
+
 ## 1.1.1
 * Bump `reason-language-server` to `1.2.4`.
 
