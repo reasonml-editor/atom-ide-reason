@@ -50,6 +50,13 @@ export default {
         order: 30,
         default: 80,
       },
+      autoRebuild: {
+        type: 'boolean',
+        title: 'Auto rebuild on save',
+        description: 'Auto-run bsb / dune on file save',
+        order: 40,
+        default: true,
+      },
     },
   },
 

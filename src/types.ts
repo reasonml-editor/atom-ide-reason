@@ -7,6 +7,7 @@ export interface RLSConfig {
   refmt: string | null,
   lispRefmt: string | null,
   formatWidth: number | null,
+  autoRebuild: boolean,
 }
 
 export interface Config {

@@ -1,5 +1,6 @@
 ## 1.2.0
 * Bump `reason-language-server` to `1.4.1`.
+* Add `autoRebuild` option to settings.
 
 ## 1.1.2
 * Bump `reason-language-server` to `1.3.0`.

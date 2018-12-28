@@ -18,6 +18,7 @@ const DEFAULT_PER_PROJECT_CONFIG = {
     refmt: 'refmt',
     lispRefmt: 'lispRefmt',
     format_width: 80,
+    autoRebuild: true,
   },
   ols: languageServer.ISettings.defaults.reason,
 }
@@ -73,6 +74,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
           refmt: config.rls.refmt,
           lispRefmt: config.rls.lispRefmt,
           format_width: config.rls.formatWidth,
+          autoRebuild: config.rls.autoRebuild,
           per_value_codelens: false,
           dependencies_codelens: false,
           opens_codelens: false,
