@@ -14,6 +14,7 @@ export interface Config {
   server: { tool: 'rls' | 'ols' },
   rls: RLSConfig,
   ols: OLSConfig,
+  autocompleteResultsFirst: boolean,
 }
 
 export type OLSToolKeys = keyof OLSConfig['path'];

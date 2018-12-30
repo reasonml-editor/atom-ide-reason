@@ -224,4 +224,15 @@ export default {
       },
     },
   },
+
+  autocompleteResultsFirst: {
+    type: 'boolean',
+    title: 'Show Language Server autocomplete results first',
+    description:
+      'If checked, Language Server suggestions will be placed before ' +
+      'the rest of autocomplete results (e.g. snippets etc.). ' +
+      'Requires restart to take effect.',
+    default: true,
+    order: 40,
+  },
 };

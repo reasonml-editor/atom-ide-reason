@@ -21,6 +21,7 @@ const DEFAULT_PER_PROJECT_CONFIG = {
     autoRebuild: true,
   },
   ols: languageServer.ISettings.defaults.reason,
+  autocompleteResultsFirst: true,
 }
 
 const scopes = [
@@ -249,6 +250,12 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
       }
       default: return true
     }
+  }
+
+  provideAutocomplete() {
+    return Object.assign(super.provideAutocomplete(), {
+      suggestionPriority: this.config.autocompleteResultsFirst ? 5 : 1,
+    });
   }
 
   // Notifications
