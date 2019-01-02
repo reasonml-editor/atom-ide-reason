@@ -53,7 +53,7 @@ export default {
       autoRebuild: {
         type: 'boolean',
         title: 'Auto rebuild on save',
-        description: 'Auto-run bsb / dune on file save',
+        description: 'Auto-run bsb / done on file save',
         order: 40,
         default: true,
       },
