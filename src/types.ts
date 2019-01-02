@@ -7,12 +7,14 @@ export interface RLSConfig {
   refmt: string | null,
   lispRefmt: string | null,
   formatWidth: number | null,
+  autoRebuild: boolean,
 }
 
 export interface Config {
   server: { tool: 'rls' | 'ols' },
   rls: RLSConfig,
   ols: OLSConfig,
+  autocompleteResultsFirst: boolean,
 }
 
 export type OLSToolKeys = keyof OLSConfig['path'];
