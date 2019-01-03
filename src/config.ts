@@ -235,4 +235,11 @@ export default {
     default: true,
     order: 40,
   },
+  formatOnSave: {
+    type: 'boolean',
+    title: 'Auto format code on save',
+    description: 'Auto-run refmt / done on file save',
+    order: 50,
+    default: true,
+  },
 };

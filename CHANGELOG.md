@@ -1,4 +1,8 @@
-## 1.2.0
+## 1.1.4
+* Add `formatOnSave` option to settings.
+* Fix cursor position after format on save.
+
+## 1.1.3
 * Bump `reason-language-server` to `1.4.1`.
 * Add `autoRebuild` option to settings.
 * Add `autocompleteResultsFirst` option to settings.

@@ -2,7 +2,7 @@ import * as cp from 'child_process'
 import * as os from 'os'
 import { AutoLanguageClient, ActiveServer } from 'atom-languageclient'
 import * as path from 'path'
-import { CompositeDisposable, FilesystemChangeEvent } from 'atom'
+import { CompositeDisposable, FilesystemChangeEvent, TextEditor, Point, TextBuffer, Range } from 'atom'
 import * as languageServer from 'ocaml-language-server'
 import * as fs from 'fs-extra'
 import merge from 'deepmerge'
@@ -10,6 +10,7 @@ import * as pkg from '../package.json'
 import config from './config'
 import * as Utils from './utils'
 import { DeepPartial, Config, FileExtension } from './types'
+import { TextEdit } from 'atom-ide';
 
 const CONFIG_FILE = ".atom/ide-reason.json"
 const DEFAULT_PER_PROJECT_CONFIG = {
@@ -140,6 +141,9 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
 
   activate() {
     super.activate()
+    atom.config.observe(this.getRootConfigurationKey(), (value) => {
+      this.config = value || this.config
+    })
     require('atom-package-deps').install('ide-reason')
       .then(() => {
         console.log('All dependencies installed, good to go')
@@ -408,6 +412,26 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
       }
     })
   }
+  provideOnSaveCodeFormat() {
+    return {
+        grammarScopes: this.getGrammarScopes(),
+        priority: 1,
+        formatOnSave: this.getFileCodeFormat.bind(this),
+    };
+  }
+  async getFileCodeFormat(editor: TextEditor) {
+    if (!this.config.formatOnSave) {
+      return []
+    }
+    let textBuf = new TextBuffer({ text: editor.getText() })
+
+    let edits = await super.getFileCodeFormat(editor as any)
+    for (const edit of edits) {
+      textBuf.setTextInRange(edit.oldRange, edit.newText)
+    }
+    return Utils.diff(editor.getText(), textBuf.getText())
+  }
+
 }
 
 module.exports = new ReasonMLLanguageClient()

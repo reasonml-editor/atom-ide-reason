@@ -21,6 +21,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/diff@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.npmjs.org/@types/diff/-/diff-3.5.2.tgz#bd92300d32675bbe9f7853480730250aa859a90a"
+  integrity sha512-T1y8ed2DipuUGqgzWzBDUMlJM1bD1CG73ETOi08VURsGArjRfC4nqfeC5owrV7SFvgbeKDbonI/Es4vQgJ2IKA==
+
 "@types/download@^6.2.2":
   version "6.2.2"
   resolved "http://registry.npm.taobao.org/@types/download/download/@types/download-6.2.2.tgz#11385a3fd6e1f3300362fb52db119420ecc0fb34"
@@ -55,9 +60,9 @@
   integrity sha512-EGoI4ylB/lPOaqXqtzAyL8HcgOuCtH2hkEaLmkueOYufsTFWBn4VCvlCDC2HW8Q+9iF+QVC3sxjDKQYjHQeZ9w==
 
 "@types/node@^8.0.41":
-  version "8.10.26"
-  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-8.10.26.tgz#950e3d4e6b316ba6e1ae4e84d9155aba67f88c2f"
-  integrity sha512-opk6bLLErLSwyVVJeSH5Ek7ZWOBSsN0JrvXTNVGLXLAXKB9xlTYajrplR44xVyMrmbut94H6uJ9jqzM/12jxkA==
+  version "8.10.39"
+  resolved "https://registry.npmjs.org/@types/node/-/node-8.10.39.tgz#e7e87ad00364dd7bc485c940926345b8ec1a26ca"
+  integrity sha512-rE7fktr02J8ybFf6eysife+WF+L4sAHWzw09DgdCebEu+qDwMvv4zl6Bc+825ttGZP73kCKxa3dhJOoGJ8+5mA==
 
 archive-type@^4.0.0:
   version "4.0.0"
@@ -75,7 +80,7 @@ async@2.6.0:
 
 atom-languageclient@0.9.6:
   version "0.9.6"
-  resolved "https://registry.yarnpkg.com/atom-languageclient/-/atom-languageclient-0.9.6.tgz#2bbb8fad72ae183c0a7d5ac3cbeea87358ecf260"
+  resolved "https://registry.npmjs.org/atom-languageclient/-/atom-languageclient-0.9.6.tgz#2bbb8fad72ae183c0a7d5ac3cbeea87358ecf260"
   integrity sha512-ajs/ZYbqSx46SqgRbEQRCEErMwuYtUABfyJL9OJdodMlJFPcrrjyF+ktEcyFpOcG2IBh8gTomibY1XCVAhe3cg==
   dependencies:
     "@types/atom" "^1.28.0"
@@ -319,6 +324,11 @@ deepmerge@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.1.0.tgz#511a54fff405fc346f0240bb270a3e9533a31102"
   integrity sha512-Q89Z26KAfA3lpPGhbF6XMfYAm3jIV3avViy6KOJ2JLzFbeWHOvPQUu5aSJIWXap3gDZC2y1eF5HXEPI2wGqgvw==
+
+diff@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npmjs.org/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
+  integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
 
 download@^7.1.0:
   version "7.1.0"
@@ -1070,7 +1080,7 @@ vscode-jsonrpc@3.6.0, vscode-jsonrpc@^3.6.0:
 
 vscode-jsonrpc@^3.6.0-next.1:
   version "3.6.2"
-  resolved "http://registry.npm.taobao.org/vscode-jsonrpc/download/vscode-jsonrpc-3.6.2.tgz#3b5eef691159a15556ecc500e9a8a0dd143470c8"
+  resolved "https://registry.npmjs.org/vscode-jsonrpc/-/vscode-jsonrpc-3.6.2.tgz#3b5eef691159a15556ecc500e9a8a0dd143470c8"
   integrity sha512-T24Jb5V48e4VgYliUXMnZ379ItbrXgOimweKaJshD84z+8q7ZOZjJan0MeDe+Ugb+uqERDVV8SBmemaGMSMugA==
 
 vscode-languageclient@4.0.1:
@@ -1090,7 +1100,7 @@ vscode-languageserver-protocol@3.6.0, vscode-languageserver-protocol@^3.6.0:
 
 vscode-languageserver-protocol@3.6.0-next.5:
   version "3.6.0-next.5"
-  resolved "http://registry.npm.taobao.org/vscode-languageserver-protocol/download/vscode-languageserver-protocol-3.6.0-next.5.tgz#ed2ec2db759826f753c0a13977dfb2bedc4d31b3"
+  resolved "http://registry.npmjs.org/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.6.0-next.5.tgz#ed2ec2db759826f753c0a13977dfb2bedc4d31b3"
   integrity sha512-pfu6A4VHDnLn+/UryZc0TKRUl63FdIFMTng27kOER1xk2yXDlqVenQX//8s1Veb0xVGATKITiFKIvUIl037mtg==
   dependencies:
     vscode-jsonrpc "^3.6.0-next.1"
@@ -1102,9 +1112,9 @@ vscode-languageserver-types@^3.6.0:
   integrity sha512-Npi3i8gUWcx5h8z5idNqPKBLJmZothXK2FSG4csEmxAR7avb8W6l9Ny+VW9yCUB3bOdD7iXfah8IO0AS1jwQmQ==
 
 vscode-languageserver-types@^3.6.0-next.1:
-  version "3.10.1"
-  resolved "http://registry.npm.taobao.org/vscode-languageserver-types/download/vscode-languageserver-types-3.10.1.tgz#d5d5f44f688a3b2aa9857dc53cb9cacca73fe35a"
-  integrity sha512-HeQ1BPYJDly4HfKs0h2TUAZyHfzTAhgQsCwsa1tW9PhuvGGsd2r3Q53FFVugwP7/2bUv3GWPoTgAuIAkIdBc4w==
+  version "3.14.0"
+  resolved "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.14.0.tgz#d3b5952246d30e5241592b6dde8280e03942e743"
+  integrity sha512-lTmS6AlAlMHOvPQemVwo3CezxBp0sNB95KNPkqp3Nxd5VFEnuG1ByM0zlRWos0zjO3ZWtkvhal0COgiV1xIA4A==
 
 vscode-languageserver@4.0.0:
   version "4.0.0"

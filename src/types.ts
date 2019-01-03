@@ -15,6 +15,7 @@ export interface Config {
   rls: RLSConfig,
   ols: OLSConfig,
   autocompleteResultsFirst: boolean,
+  formatOnSave: boolean,
 }
 
 export type OLSToolKeys = keyof OLSConfig['path'];
