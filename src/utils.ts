@@ -69,6 +69,7 @@ export function capitalize(str: string) {
 export function diff(original: string, text: string) {
   let pos = new Point(0, 0)
   let edits: TextEdit[] = []
+  console.log('diff lines', diffLines(original, text, { ignoreCase: false, newlineIsToken: true, ignoreWhitespace: false }))
   for (let { value, added, removed } of diffLines(original, text, { ignoreCase: false, newlineIsToken: true, ignoreWhitespace: false })) {
     const m = value.match(/\r\n|\n|\r/g)
     const row = m ? m.length : 0
@@ -82,10 +83,10 @@ export function diff(original: string, text: string) {
     const endPos = pos.traverse([row, col])
 
     if (added) {
-      edits.push({ oldRange: new Range(pos, pos), newText: value, oldText: '' })
+      edits.push({ oldRange: new Range(pos, pos), newText: value })
       pos = endPos
     } else if (removed) {
-      edits.push({ oldRange: new Range(pos, endPos), newText: '', oldText: value })
+      edits.push({ oldRange: new Range(pos, endPos), newText: ''})
     } else {
       pos = endPos
     }

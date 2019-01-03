@@ -429,9 +429,12 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     for (const edit of edits) {
       textBuf.setTextInRange(edit.oldRange, edit.newText)
     }
-    return Utils.diff(editor.getText(), textBuf.getText())
+    edits = Utils.diff(editor.getText(), textBuf.getText()) // diff text edits for consistent cursor position
+    for (const edit of edits) { // manually apply text edits to avoid insert trailing new line.
+      editor.setTextInBufferRange(edit.oldRange, edit.newText)
+    }
+    return []
   }
-
 }
 
 module.exports = new ReasonMLLanguageClient()
