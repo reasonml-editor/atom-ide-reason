@@ -36,12 +36,15 @@ const scopes = [
   'source.mli',
 ]
 
+const InsertFinalNewLineKey = 'whitespace.ensureSingleTrailingNewline'
+
 class ReasonMLLanguageClient extends AutoLanguageClient {
   subscriptions: CompositeDisposable | null = null
   servers: { [K: string]: ActiveServer } = {}
 
   config: Config = atom.config.get(this.getRootConfigurationKey()) || {}
   configPerProject: DeepPartial<Config> | null = null
+  insertFinalNewLine: boolean = atom.config.get(InsertFinalNewLineKey) || false
 
   getLanguageName () { return 'Reason' }
   getGrammarScopes () { return scopes }
@@ -143,6 +146,9 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     super.activate()
     atom.config.observe(this.getRootConfigurationKey(), (value) => {
       this.config = value || this.config
+    })
+    atom.config.observe(InsertFinalNewLineKey, value => {
+      this.insertFinalNewLine = value
     })
     require('atom-package-deps').install('ide-reason')
       .then(() => {
@@ -426,14 +432,19 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     let textBuf = new TextBuffer({ text: editor.getText() })
 
     let edits = await super.getFileCodeFormat(editor as any)
+     // diff text edits for consistent cursor position
     for (const edit of edits) {
-      textBuf.setTextInRange(edit.oldRange, edit.newText)
+      textBuf.setTextInRange(edit.oldRange, edit.newText, { undo: 'skip', normalizeLineEndings: true })
     }
-    edits = Utils.diff(editor.getText(), textBuf.getText()) // diff text edits for consistent cursor position
-    for (const edit of edits) { // manually apply text edits to avoid insert trailing new line.
-      editor.setTextInBufferRange(edit.oldRange, edit.newText)
+    // Fix atom-languageclient's format-on-save feature conflicts with `insert final new line`.
+    if (
+      this.insertFinalNewLine &&
+      textBuf.getLastLine() !== ''
+    ) {
+      textBuf.append('\n', { undo: 'skip', normalizeLineEndings: true })
     }
-    return []
+    edits = Utils.diff(editor.getText(), textBuf.getText())
+    return edits
   }
 }
 
