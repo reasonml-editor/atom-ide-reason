@@ -326,22 +326,20 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
   }
 
   findRoot(location: string, test: string[]): string | null {
-    const dirs = location.split(path.sep);
-
-    if (dirs.length === 0 || (dirs.length === 1 && dirs[0] === "")) {
-      return null;
+    const dirObj=path.parse(location);
+    if (dirObj.base === "") {
+        return null;
     }
-
-    const file = path.join(...dirs, ...test);
-
+    const file = path.join(path.format(dirObj), ...test);
     if (fs.existsSync(file)) {
-      return location;
-    } else {
-      let parent = path.join(...dirs.slice(0, -1));
-      return this.findRoot(
-        parent[0] === path.sep ? parent : path.sep + parent,
-        test,
-      );
+        return location;
+    }
+    else {
+        let parent = path.format({
+            root: dirObj.root,
+            dir: dirObj.dir
+        });
+        return this.findRoot(parent, test);
     }
   }
 
