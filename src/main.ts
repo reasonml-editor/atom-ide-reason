@@ -432,14 +432,14 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     let edits = await super.getFileCodeFormat(editor as any)
      // diff text edits for consistent cursor position
     for (const edit of edits) {
-      textBuf.setTextInRange(edit.oldRange, edit.newText, { undo: 'skip', normalizeLineEndings: true })
+      textBuf.setTextInRange(edit.oldRange, edit.newText, { normalizeLineEndings: true })
     }
     // Fix atom-languageclient's format-on-save feature conflicts with `insert final new line`.
     if (
       this.insertFinalNewLine &&
       textBuf.getLastLine() !== ''
     ) {
-      textBuf.append('\n', { undo: 'skip', normalizeLineEndings: true })
+      textBuf.append('\n', { normalizeLineEndings: true })
     }
     edits = Utils.diff(editor.getText(), textBuf.getText())
     return edits

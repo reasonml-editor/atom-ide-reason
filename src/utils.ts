@@ -84,9 +84,9 @@ export function diff(original: string, text: string) {
 
     if (added) {
       edits.push({ oldRange: new Range(pos, pos), newText: value })
-      pos = endPos
     } else if (removed) {
       edits.push({ oldRange: new Range(pos, endPos), newText: ''})
+      pos = endPos
     } else {
       pos = endPos
     }
