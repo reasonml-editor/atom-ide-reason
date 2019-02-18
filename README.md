@@ -13,7 +13,7 @@ apm install ide-reason
 
 * [atom-ide-ui](https://atom.io/packages/atom-ide-ui) or ([nuclide](https://atom.io/packages/nuclide))
 * language syntax package
-  * [language-ocaml](https://atom.io/packages/language-ocaml) for OCaml
+  * [language-ocaml](https://atom.io/packages/language-ocaml) or [language-ocaml-fix](https://atom.io/packages/language-ocaml-fix) for OCaml
   * [language-reason](https://atom.io/packages/language-reason) for Reason
 * [BuckleScript](https://reasonml.github.io/docs/en/installation) to use `bsb` as diagnostic tool & to generate interface files. Both, global & local installations are supported, local is recommended.
 
