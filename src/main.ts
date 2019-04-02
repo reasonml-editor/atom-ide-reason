@@ -16,8 +16,8 @@ const CONFIG_FILE = ".atom/ide-reason.json"
 const DEFAULT_PER_PROJECT_CONFIG = {
   server: { tool: 'rls' },
   rls: {
-    refmt: 'refmt',
-    lispRefmt: 'lispRefmt',
+    refmt: '',
+    lispRefmt: '',
     format_width: 80,
     autoRebuild: true,
   },
@@ -76,13 +76,15 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     switch (config.server.tool) {
       case 'rls':
         return {
-          refmt: config.rls.refmt,
-          lispRefmt: config.rls.lispRefmt,
-          format_width: config.rls.formatWidth,
-          autoRebuild: config.rls.autoRebuild,
-          per_value_codelens: false,
-          dependencies_codelens: false,
-          opens_codelens: false,
+          reason_language_server: {
+            refmt: config.rls.refmt,
+            lispRefmt: config.rls.lispRefmt,
+            format_width: config.rls.formatWidth,
+            autoRebuild: config.rls.autoRebuild,
+            per_value_codelens: false,
+            dependencies_codelens: false,
+            opens_codelens: false,
+          }
         }
       case 'ols':
         return {
