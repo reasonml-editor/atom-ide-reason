@@ -4,7 +4,7 @@
   "private": true,
   "version": "1.1.10",
   "description": "ReasonML/OCaml language support for Atom-IDE.",
-  "rls_version": "1.6.0",
+  "rls_version": "1.6.1",
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
