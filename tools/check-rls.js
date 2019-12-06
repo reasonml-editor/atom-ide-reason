@@ -33,8 +33,9 @@ if (CurrentVersion === pkg.rls_version) {
     }[platform]
     let filename = path.basename(rlsPath)
     const tmpdir = path.join(os.tmpdir(), `rls-${Math.random().toString(36).slice(2)}`)
-    download(`https://github.com/jaredly/reason-language-server/releases/download/${pkg.rls_version}/${remotePlatform}.zip`, tmpdir, { extract: true }).then(() => {
-      fs.copyFileSync(path.join(tmpdir, 'reason-language-server', 'reason-language-server.exe'), rlsPath)
+    download(`https://github.com/jaredly/reason-language-server/releases/download/${pkg.rls_version}/rls-${remotePlatform}.zip`, tmpdir, { extract: true }).then(() => {
+      let bin = platform === 'win32' ? 'reason-language-server.exe' : 'reason-language-server'
+      fs.copyFileSync(path.join(tmpdir, `rls-${remotePlatform}`, bin), rlsPath)
       console.log(`${rlsPath} is downloaded!`)
     })
     .catch(err => {
