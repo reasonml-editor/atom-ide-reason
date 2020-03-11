@@ -320,7 +320,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
   }
 
   findBinRoot(location: string): string | null {
-    return this.findRoot(location, ["node_modules", "bs-platform", "lib", "bsb.exe"]);
+    return this.findRoot(location, ["node_modules", "bs-platform", "bsb"]);
   }
 
   findProjectRoot(location: string): string | null {
@@ -374,7 +374,7 @@ class ReasonMLLanguageClient extends AutoLanguageClient {
     let bscBin;
     const projectBscBin =
       binRoot
-      ? path.join(binRoot, "node_modules", "bs-platform", "lib", "bsc.exe")
+      ? path.join(binRoot, "node_modules", "bs-platform", "bsc")
       : null;
     if (projectBscBin && fs.existsSync(projectBscBin)) {
       bscBin = projectBscBin;
